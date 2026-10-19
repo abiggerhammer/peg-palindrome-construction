@@ -1,0 +1,75 @@
+{
+  "base_commit": "7fd2d8dc98ddf4f2432693a7a0804420fe873616",
+  "computational_evidence": {
+    "failure_characterization_exhaustive_binary_through": 13,
+    "ordinary_checkpoint_exhaustive_binary_through": 7,
+    "ratio_grid_n_through": 512,
+    "selected_unique_tests_passed": 44,
+    "source_manifest_changed": false,
+    "source_manifest_sha256": "da0be2a2948b568c7a5b4d024ae642bbf55d48b20338fdfa46a78f6d2115b0d8"
+  },
+  "conclusions": [
+    "one-shot outputs the first two specialized Lemma-3.2 gaps",
+    "candidate marker iff d=min G(w) and 15d<=|w|<16d",
+    "reusable clean READY execution refines a fresh one-shot execution",
+    "pause/resume and explicit retirement preserve semantics",
+    "persistent terminal emits d exactly at |u|=16d with d=min G(u)",
+    "RECOVER and bounded-query LOCAL wrappers implement their abstract specifications"
+  ],
+  "date": "2026-07-25",
+  "file_sha256": {
+    "CHECKPOINT_CORRECT_PROOF_2026-07-25.md": "3beffd02fe975c9d8760480e734a46e65e623696b8553935955f50c909dfbd34",
+    "algorithm_y_ordinary_tm.py": "ea22e99fef723cf651b69f83033ccf14105d86874bb676d630134bd9a71c5a4f",
+    "checkpoint_correctness.py": "5ccd5b278c6cb66b6d22981f04087dd12b18bc9807846f4e68af94315e55d124",
+    "checkpoint_ordinary_tm.py": "36b3df92ecd3ceba7badd93e044e5e4515d79c8c297146d09f0dd3cbb0a3749e",
+    "checkpoint_reusable_tm.py": "9004932380a3ab7ed4a740859f487ea29d152ef036e3e4cc41698bf0fd27b3e0",
+    "fp_algorithm_y_multihead.py": "2b62af1de8499e5f89d715244e27ced0d474077572102e4f74dbf4b124242800",
+    "history_zipper_ordinary_tm.py": "d49abfece449cd978d2479751e69fc64bd8829cd8ddbc9759be56d3700226ac7",
+    "lemma33_checkpoint_terminal.py": "85de721779b17b347771c785268a052cb0eea93aaa02b7046939d854e0783278",
+    "ordinary_history_terminal.py": "0d3e765ebcc4bbb83aed49b038cf33952110f5a4696e49a0c4a7ece986fd59dd",
+    "ordinary_lemma32_worker.py": "da7a87004c44dcfa78fbe24b89e14e8ca0c549baebfbf9495675d8c196be899b",
+    "strict_append_read_zipper.py": "88cf74e10542c3dfa64eaab72ddc0faa5ca7fdd034449e6f6eb455fb85390150",
+    "strict_stack_queue.py": "3267e7646275748c4c158dfe080db57f197687ef40404f3040d1b82c2962ddea"
+  },
+  "imported_proved_dependency": "BackgroundCatchUp (timeliness only)",
+  "machine_shape": {
+    "algorithm_y_boundary_max_steps": 103,
+    "checkpoint_one_shot_rows": 765979,
+    "checkpoint_one_shot_states": 484522,
+    "checkpoint_one_shot_tapes": 63,
+    "checkpoint_reusable_rows": 766209,
+    "checkpoint_reusable_states": 484699,
+    "checkpoint_reusable_tapes": 64
+  },
+  "proved_sublemmas": [
+    "period/border equivalence",
+    "palindromic prefix and suffix border encodings",
+    "Algorithm-Y Delta recurrence",
+    "strict Hood-Melville queue semantics",
+    "append/read zipper semantics",
+    "ordinary Algorithm-Y stuttering simulation",
+    "PLAIN/PREFIX/SUFFIX pattern preparation",
+    "PERIOD/FULL/PARTIAL marker-axis invariants",
+    "first-two union merge",
+    "15d/16d source-head ratio invariant",
+    "fresh-epoch translation bisimulation",
+    "persistent 2d-period survival and target emission"
+  ],
+  "remaining_external_obligations": [
+    "outer case-3 local-window reduction",
+    "primitive predictability bounds for cases 1-4",
+    "global six-case need<=C*avail+D theorem",
+    "scheduler regeneration"
+  ],
+  "scope": {
+    "alphabet": [
+      "0",
+      "1"
+    ],
+    "c": 16,
+    "frozen_words": "all nonempty binary words",
+    "local_semantics": "bounded 4r query; outer local-window lemma remains separate"
+  },
+  "status": "proved",
+  "theorem": "CheckpointCorrect"
+}

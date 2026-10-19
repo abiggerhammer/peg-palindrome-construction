@@ -1,0 +1,52 @@
+[
+  {
+    "name": "case1",
+    "word": "0",
+    "bit": "0",
+    "jump": 0,
+    "steps": 636,
+    "bound": 1433
+  },
+  {
+    "name": "case2",
+    "word": "00",
+    "bit": "1",
+    "jump": 2,
+    "steps": 3930,
+    "bound": 496766
+  },
+  {
+    "name": "case4",
+    "word": "011",
+    "bit": "0",
+    "jump": 0,
+    "steps": 512,
+    "bound": 1468
+  },
+  {
+    "name": "case3_at_end",
+    "word": "",
+    "bit": "0",
+    "jump": 1,
+    "steps": 935,
+    "bound": 2755,
+    "active": 0
+  },
+  {
+    "name": "case3_large",
+    "word": "00",
+    "bit": "0",
+    "jump": 1,
+    "steps": 2853,
+    "bound": 891977,
+    "active": 1
+  },
+  {
+    "name": "case3_small",
+    "word_length": 66,
+    "bit": "1",
+    "jump": 2,
+    "steps": 12692,
+    "bound": 489292
+  }
+]

@@ -1,0 +1,3173 @@
+{
+  "alphabet": [
+    "_",
+    "#",
+    "0",
+    "1"
+  ],
+  "blank": "_",
+  "tape_count": 4,
+  "states": [
+    "ADV_SCAN",
+    "ADV_START",
+    "BACK_CLEAN_T",
+    "BACK_CONSUME_BOUNDARY",
+    "BACK_COPY",
+    "BACK_ERASE_S",
+    "BACK_MOVE_PREP",
+    "BACK_RESTORE_PREP",
+    "BACK_START",
+    "HALT"
+  ],
+  "halting_states": [
+    "HALT"
+  ],
+  "transitions": [
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "0",
+        "_",
+        "#",
+        "#"
+      ],
+      "next_state": "HALT",
+      "writes": [
+        "0",
+        "_",
+        "#",
+        "#"
+      ],
+      "moves": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "0",
+        "_",
+        "#",
+        "0"
+      ],
+      "next_state": "HALT",
+      "writes": [
+        "0",
+        "_",
+        "#",
+        "0"
+      ],
+      "moves": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "0",
+        "_",
+        "#",
+        "1"
+      ],
+      "next_state": "HALT",
+      "writes": [
+        "0",
+        "_",
+        "#",
+        "1"
+      ],
+      "moves": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "0",
+        "_",
+        "#",
+        "_"
+      ],
+      "next_state": "HALT",
+      "writes": [
+        "0",
+        "_",
+        "#",
+        "_"
+      ],
+      "moves": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "0",
+        "_",
+        "0",
+        "#"
+      ],
+      "next_state": "HALT",
+      "writes": [
+        "0",
+        "_",
+        "0",
+        "#"
+      ],
+      "moves": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "0",
+        "_",
+        "0",
+        "0"
+      ],
+      "next_state": "HALT",
+      "writes": [
+        "0",
+        "_",
+        "0",
+        "0"
+      ],
+      "moves": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "0",
+        "_",
+        "0",
+        "1"
+      ],
+      "next_state": "HALT",
+      "writes": [
+        "0",
+        "_",
+        "0",
+        "1"
+      ],
+      "moves": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "0",
+        "_",
+        "0",
+        "_"
+      ],
+      "next_state": "HALT",
+      "writes": [
+        "0",
+        "_",
+        "0",
+        "_"
+      ],
+      "moves": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "0",
+        "_",
+        "1",
+        "#"
+      ],
+      "next_state": "HALT",
+      "writes": [
+        "0",
+        "_",
+        "1",
+        "#"
+      ],
+      "moves": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "0",
+        "_",
+        "1",
+        "0"
+      ],
+      "next_state": "HALT",
+      "writes": [
+        "0",
+        "_",
+        "1",
+        "0"
+      ],
+      "moves": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "0",
+        "_",
+        "1",
+        "1"
+      ],
+      "next_state": "HALT",
+      "writes": [
+        "0",
+        "_",
+        "1",
+        "1"
+      ],
+      "moves": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "0",
+        "_",
+        "1",
+        "_"
+      ],
+      "next_state": "HALT",
+      "writes": [
+        "0",
+        "_",
+        "1",
+        "_"
+      ],
+      "moves": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "0",
+        "_",
+        "_",
+        "#"
+      ],
+      "next_state": "HALT",
+      "writes": [
+        "0",
+        "_",
+        "_",
+        "#"
+      ],
+      "moves": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "0",
+        "_",
+        "_",
+        "0"
+      ],
+      "next_state": "HALT",
+      "writes": [
+        "0",
+        "_",
+        "_",
+        "0"
+      ],
+      "moves": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "0",
+        "_",
+        "_",
+        "1"
+      ],
+      "next_state": "HALT",
+      "writes": [
+        "0",
+        "_",
+        "_",
+        "1"
+      ],
+      "moves": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "0",
+        "_",
+        "_",
+        "_"
+      ],
+      "next_state": "HALT",
+      "writes": [
+        "0",
+        "_",
+        "_",
+        "_"
+      ],
+      "moves": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "1",
+        "_",
+        "#",
+        "#"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "1",
+        "1",
+        "#",
+        "#"
+      ],
+      "moves": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "1",
+        "_",
+        "#",
+        "0"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "1",
+        "1",
+        "#",
+        "0"
+      ],
+      "moves": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "1",
+        "_",
+        "#",
+        "1"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "1",
+        "1",
+        "#",
+        "1"
+      ],
+      "moves": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "1",
+        "_",
+        "#",
+        "_"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "1",
+        "1",
+        "#",
+        "_"
+      ],
+      "moves": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "1",
+        "_",
+        "0",
+        "#"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "1",
+        "1",
+        "0",
+        "#"
+      ],
+      "moves": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "1",
+        "_",
+        "0",
+        "0"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "1",
+        "1",
+        "0",
+        "0"
+      ],
+      "moves": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "1",
+        "_",
+        "0",
+        "1"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "1",
+        "1",
+        "0",
+        "1"
+      ],
+      "moves": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "1",
+        "_",
+        "0",
+        "_"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "1",
+        "1",
+        "0",
+        "_"
+      ],
+      "moves": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "1",
+        "_",
+        "1",
+        "#"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "1",
+        "1",
+        "1",
+        "#"
+      ],
+      "moves": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "1",
+        "_",
+        "1",
+        "0"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "1",
+        "1",
+        "1",
+        "0"
+      ],
+      "moves": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "1",
+        "_",
+        "1",
+        "1"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "moves": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "1",
+        "_",
+        "1",
+        "_"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "1",
+        "1",
+        "1",
+        "_"
+      ],
+      "moves": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "1",
+        "_",
+        "_",
+        "#"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "1",
+        "1",
+        "_",
+        "#"
+      ],
+      "moves": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "1",
+        "_",
+        "_",
+        "0"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "1",
+        "1",
+        "_",
+        "0"
+      ],
+      "moves": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "1",
+        "_",
+        "_",
+        "1"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "1",
+        "1",
+        "_",
+        "1"
+      ],
+      "moves": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_SCAN",
+      "reads": [
+        "1",
+        "_",
+        "_",
+        "_"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "1",
+        "1",
+        "_",
+        "_"
+      ],
+      "moves": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_START",
+      "reads": [
+        "0",
+        "_",
+        "#",
+        "#"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "0",
+        "_",
+        "#",
+        "#"
+      ],
+      "moves": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_START",
+      "reads": [
+        "0",
+        "_",
+        "#",
+        "0"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "0",
+        "_",
+        "#",
+        "0"
+      ],
+      "moves": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_START",
+      "reads": [
+        "0",
+        "_",
+        "#",
+        "1"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "0",
+        "_",
+        "#",
+        "1"
+      ],
+      "moves": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_START",
+      "reads": [
+        "0",
+        "_",
+        "#",
+        "_"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "0",
+        "_",
+        "#",
+        "_"
+      ],
+      "moves": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_START",
+      "reads": [
+        "0",
+        "_",
+        "0",
+        "#"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "0",
+        "_",
+        "0",
+        "#"
+      ],
+      "moves": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_START",
+      "reads": [
+        "0",
+        "_",
+        "0",
+        "0"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "0",
+        "_",
+        "0",
+        "0"
+      ],
+      "moves": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_START",
+      "reads": [
+        "0",
+        "_",
+        "0",
+        "1"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "0",
+        "_",
+        "0",
+        "1"
+      ],
+      "moves": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_START",
+      "reads": [
+        "0",
+        "_",
+        "0",
+        "_"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "0",
+        "_",
+        "0",
+        "_"
+      ],
+      "moves": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_START",
+      "reads": [
+        "0",
+        "_",
+        "1",
+        "#"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "0",
+        "_",
+        "1",
+        "#"
+      ],
+      "moves": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_START",
+      "reads": [
+        "0",
+        "_",
+        "1",
+        "0"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "0",
+        "_",
+        "1",
+        "0"
+      ],
+      "moves": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_START",
+      "reads": [
+        "0",
+        "_",
+        "1",
+        "1"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "0",
+        "_",
+        "1",
+        "1"
+      ],
+      "moves": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_START",
+      "reads": [
+        "0",
+        "_",
+        "1",
+        "_"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "0",
+        "_",
+        "1",
+        "_"
+      ],
+      "moves": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_START",
+      "reads": [
+        "0",
+        "_",
+        "_",
+        "#"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "0",
+        "_",
+        "_",
+        "#"
+      ],
+      "moves": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_START",
+      "reads": [
+        "0",
+        "_",
+        "_",
+        "0"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "0",
+        "_",
+        "_",
+        "0"
+      ],
+      "moves": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_START",
+      "reads": [
+        "0",
+        "_",
+        "_",
+        "1"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "0",
+        "_",
+        "_",
+        "1"
+      ],
+      "moves": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "ADV_START",
+      "reads": [
+        "0",
+        "_",
+        "_",
+        "_"
+      ],
+      "next_state": "ADV_SCAN",
+      "writes": [
+        "0",
+        "_",
+        "_",
+        "_"
+      ],
+      "moves": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "BACK_CLEAN_T",
+      "reads": [
+        "0",
+        "_",
+        "_",
+        "_"
+      ],
+      "next_state": "HALT",
+      "writes": [
+        "0",
+        "_",
+        "_",
+        "_"
+      ],
+      "moves": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "BACK_CONSUME_BOUNDARY",
+      "reads": [
+        "0",
+        "_",
+        "#",
+        "_"
+      ],
+      "next_state": "BACK_CLEAN_T",
+      "writes": [
+        "0",
+        "_",
+        "#",
+        "_"
+      ],
+      "moves": [
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "state": "BACK_CONSUME_BOUNDARY",
+      "reads": [
+        "0",
+        "_",
+        "1",
+        "_"
+      ],
+      "next_state": "BACK_MOVE_PREP",
+      "writes": [
+        "0",
+        "_",
+        "1",
+        "_"
+      ],
+      "moves": [
+        -1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "BACK_COPY",
+      "reads": [
+        "#",
+        "#",
+        "_",
+        "_"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "#",
+        "#",
+        "_",
+        "_"
+      ],
+      "moves": [
+        0,
+        0,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_COPY",
+      "reads": [
+        "#",
+        "1",
+        "_",
+        "_"
+      ],
+      "next_state": "BACK_COPY",
+      "writes": [
+        "#",
+        "1",
+        "1",
+        "1"
+      ],
+      "moves": [
+        0,
+        -1,
+        1,
+        1
+      ]
+    },
+    {
+      "state": "BACK_COPY",
+      "reads": [
+        "0",
+        "#",
+        "_",
+        "_"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "0",
+        "#",
+        "_",
+        "_"
+      ],
+      "moves": [
+        0,
+        0,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_COPY",
+      "reads": [
+        "0",
+        "1",
+        "_",
+        "_"
+      ],
+      "next_state": "BACK_COPY",
+      "writes": [
+        "0",
+        "1",
+        "1",
+        "1"
+      ],
+      "moves": [
+        0,
+        -1,
+        1,
+        1
+      ]
+    },
+    {
+      "state": "BACK_COPY",
+      "reads": [
+        "1",
+        "#",
+        "_",
+        "_"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "1",
+        "#",
+        "_",
+        "_"
+      ],
+      "moves": [
+        0,
+        0,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_COPY",
+      "reads": [
+        "1",
+        "1",
+        "_",
+        "_"
+      ],
+      "next_state": "BACK_COPY",
+      "writes": [
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "moves": [
+        0,
+        -1,
+        1,
+        1
+      ]
+    },
+    {
+      "state": "BACK_COPY",
+      "reads": [
+        "_",
+        "#",
+        "_",
+        "_"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "_",
+        "#",
+        "_",
+        "_"
+      ],
+      "moves": [
+        0,
+        0,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_COPY",
+      "reads": [
+        "_",
+        "1",
+        "_",
+        "_"
+      ],
+      "next_state": "BACK_COPY",
+      "writes": [
+        "_",
+        "1",
+        "1",
+        "1"
+      ],
+      "moves": [
+        0,
+        -1,
+        1,
+        1
+      ]
+    },
+    {
+      "state": "BACK_ERASE_S",
+      "reads": [
+        "1",
+        "1",
+        "1",
+        "_"
+      ],
+      "next_state": "BACK_MOVE_PREP",
+      "writes": [
+        "1",
+        "_",
+        "1",
+        "_"
+      ],
+      "moves": [
+        -1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "BACK_MOVE_PREP",
+      "reads": [
+        "0",
+        "_",
+        "1",
+        "_"
+      ],
+      "next_state": "BACK_CONSUME_BOUNDARY",
+      "writes": [
+        "0",
+        "_",
+        "_",
+        "_"
+      ],
+      "moves": [
+        0,
+        0,
+        -1,
+        0
+      ]
+    },
+    {
+      "state": "BACK_MOVE_PREP",
+      "reads": [
+        "1",
+        "_",
+        "1",
+        "_"
+      ],
+      "next_state": "BACK_ERASE_S",
+      "writes": [
+        "1",
+        "_",
+        "1",
+        "_"
+      ],
+      "moves": [
+        0,
+        -1,
+        0,
+        0
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "#",
+        "#",
+        "#",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "#",
+        "#",
+        "#",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "#",
+        "#",
+        "0",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "#",
+        "#",
+        "0",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "#",
+        "#",
+        "1",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "#",
+        "#",
+        "1",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "#",
+        "#",
+        "_",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "#",
+        "#",
+        "_",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "#",
+        "0",
+        "#",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "#",
+        "0",
+        "#",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "#",
+        "0",
+        "0",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "#",
+        "0",
+        "0",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "#",
+        "0",
+        "1",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "#",
+        "0",
+        "1",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "#",
+        "0",
+        "_",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "#",
+        "0",
+        "_",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "#",
+        "1",
+        "#",
+        "#"
+      ],
+      "next_state": "BACK_MOVE_PREP",
+      "writes": [
+        "#",
+        "1",
+        "#",
+        "#"
+      ],
+      "moves": [
+        -1,
+        1,
+        -1,
+        1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "#",
+        "1",
+        "#",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "#",
+        "1",
+        "#",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "#",
+        "1",
+        "0",
+        "#"
+      ],
+      "next_state": "BACK_MOVE_PREP",
+      "writes": [
+        "#",
+        "1",
+        "0",
+        "#"
+      ],
+      "moves": [
+        -1,
+        1,
+        -1,
+        1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "#",
+        "1",
+        "0",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "#",
+        "1",
+        "0",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "#",
+        "1",
+        "1",
+        "#"
+      ],
+      "next_state": "BACK_MOVE_PREP",
+      "writes": [
+        "#",
+        "1",
+        "1",
+        "#"
+      ],
+      "moves": [
+        -1,
+        1,
+        -1,
+        1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "#",
+        "1",
+        "1",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "#",
+        "1",
+        "1",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "#",
+        "1",
+        "_",
+        "#"
+      ],
+      "next_state": "BACK_MOVE_PREP",
+      "writes": [
+        "#",
+        "1",
+        "_",
+        "#"
+      ],
+      "moves": [
+        -1,
+        1,
+        -1,
+        1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "#",
+        "1",
+        "_",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "#",
+        "1",
+        "_",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "#",
+        "_",
+        "#",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "#",
+        "_",
+        "#",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "#",
+        "_",
+        "0",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "#",
+        "_",
+        "0",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "#",
+        "_",
+        "1",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "#",
+        "_",
+        "1",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "#",
+        "_",
+        "_",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "#",
+        "_",
+        "_",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "0",
+        "#",
+        "#",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "0",
+        "#",
+        "#",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "0",
+        "#",
+        "0",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "0",
+        "#",
+        "0",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "0",
+        "#",
+        "1",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "0",
+        "#",
+        "1",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "0",
+        "#",
+        "_",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "0",
+        "#",
+        "_",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "0",
+        "0",
+        "#",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "0",
+        "0",
+        "#",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "0",
+        "0",
+        "0",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "0",
+        "0",
+        "1",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "0",
+        "0",
+        "1",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "0",
+        "0",
+        "_",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "0",
+        "0",
+        "_",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "0",
+        "1",
+        "#",
+        "#"
+      ],
+      "next_state": "BACK_MOVE_PREP",
+      "writes": [
+        "0",
+        "1",
+        "#",
+        "#"
+      ],
+      "moves": [
+        -1,
+        1,
+        -1,
+        1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "0",
+        "1",
+        "#",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "0",
+        "1",
+        "#",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "0",
+        "1",
+        "0",
+        "#"
+      ],
+      "next_state": "BACK_MOVE_PREP",
+      "writes": [
+        "0",
+        "1",
+        "0",
+        "#"
+      ],
+      "moves": [
+        -1,
+        1,
+        -1,
+        1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "0",
+        "1",
+        "0",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "0",
+        "1",
+        "0",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "0",
+        "1",
+        "1",
+        "#"
+      ],
+      "next_state": "BACK_MOVE_PREP",
+      "writes": [
+        "0",
+        "1",
+        "1",
+        "#"
+      ],
+      "moves": [
+        -1,
+        1,
+        -1,
+        1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "0",
+        "1",
+        "1",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "0",
+        "1",
+        "1",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "0",
+        "1",
+        "_",
+        "#"
+      ],
+      "next_state": "BACK_MOVE_PREP",
+      "writes": [
+        "0",
+        "1",
+        "_",
+        "#"
+      ],
+      "moves": [
+        -1,
+        1,
+        -1,
+        1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "0",
+        "1",
+        "_",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "0",
+        "1",
+        "_",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "0",
+        "_",
+        "#",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "0",
+        "_",
+        "#",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "0",
+        "_",
+        "0",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "0",
+        "_",
+        "0",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "0",
+        "_",
+        "1",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "0",
+        "_",
+        "1",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "0",
+        "_",
+        "_",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "0",
+        "_",
+        "_",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "1",
+        "#",
+        "#",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "1",
+        "#",
+        "#",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "1",
+        "#",
+        "0",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "1",
+        "#",
+        "0",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "1",
+        "#",
+        "1",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "1",
+        "#",
+        "1",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "1",
+        "#",
+        "_",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "1",
+        "#",
+        "_",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "1",
+        "0",
+        "#",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "1",
+        "0",
+        "#",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "1",
+        "0",
+        "0",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "1",
+        "0",
+        "0",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "1",
+        "0",
+        "1",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "1",
+        "0",
+        "1",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "1",
+        "0",
+        "_",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "1",
+        "0",
+        "_",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "1",
+        "1",
+        "#",
+        "#"
+      ],
+      "next_state": "BACK_MOVE_PREP",
+      "writes": [
+        "1",
+        "1",
+        "#",
+        "#"
+      ],
+      "moves": [
+        -1,
+        1,
+        -1,
+        1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "1",
+        "1",
+        "#",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "1",
+        "1",
+        "#",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "1",
+        "1",
+        "0",
+        "#"
+      ],
+      "next_state": "BACK_MOVE_PREP",
+      "writes": [
+        "1",
+        "1",
+        "0",
+        "#"
+      ],
+      "moves": [
+        -1,
+        1,
+        -1,
+        1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "1",
+        "1",
+        "0",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "1",
+        "1",
+        "0",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "1",
+        "1",
+        "1",
+        "#"
+      ],
+      "next_state": "BACK_MOVE_PREP",
+      "writes": [
+        "1",
+        "1",
+        "1",
+        "#"
+      ],
+      "moves": [
+        -1,
+        1,
+        -1,
+        1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "1",
+        "1",
+        "1",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "1",
+        "1",
+        "_",
+        "#"
+      ],
+      "next_state": "BACK_MOVE_PREP",
+      "writes": [
+        "1",
+        "1",
+        "_",
+        "#"
+      ],
+      "moves": [
+        -1,
+        1,
+        -1,
+        1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "1",
+        "1",
+        "_",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "1",
+        "1",
+        "_",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "1",
+        "_",
+        "#",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "1",
+        "_",
+        "#",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "1",
+        "_",
+        "0",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "1",
+        "_",
+        "0",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "1",
+        "_",
+        "1",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "1",
+        "_",
+        "1",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "1",
+        "_",
+        "_",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "1",
+        "_",
+        "_",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "_",
+        "#",
+        "#",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "_",
+        "#",
+        "#",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "_",
+        "#",
+        "0",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "_",
+        "#",
+        "0",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "_",
+        "#",
+        "1",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "_",
+        "#",
+        "1",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "_",
+        "#",
+        "_",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "_",
+        "#",
+        "_",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "_",
+        "0",
+        "#",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "_",
+        "0",
+        "#",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "_",
+        "0",
+        "0",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "_",
+        "0",
+        "0",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "_",
+        "0",
+        "1",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "_",
+        "0",
+        "1",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "_",
+        "0",
+        "_",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "_",
+        "0",
+        "_",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "_",
+        "1",
+        "#",
+        "#"
+      ],
+      "next_state": "BACK_MOVE_PREP",
+      "writes": [
+        "_",
+        "1",
+        "#",
+        "#"
+      ],
+      "moves": [
+        -1,
+        1,
+        -1,
+        1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "_",
+        "1",
+        "#",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "_",
+        "1",
+        "#",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "_",
+        "1",
+        "0",
+        "#"
+      ],
+      "next_state": "BACK_MOVE_PREP",
+      "writes": [
+        "_",
+        "1",
+        "0",
+        "#"
+      ],
+      "moves": [
+        -1,
+        1,
+        -1,
+        1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "_",
+        "1",
+        "0",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "_",
+        "1",
+        "0",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "_",
+        "1",
+        "1",
+        "#"
+      ],
+      "next_state": "BACK_MOVE_PREP",
+      "writes": [
+        "_",
+        "1",
+        "1",
+        "#"
+      ],
+      "moves": [
+        -1,
+        1,
+        -1,
+        1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "_",
+        "1",
+        "1",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "_",
+        "1",
+        "1",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "_",
+        "1",
+        "_",
+        "#"
+      ],
+      "next_state": "BACK_MOVE_PREP",
+      "writes": [
+        "_",
+        "1",
+        "_",
+        "#"
+      ],
+      "moves": [
+        -1,
+        1,
+        -1,
+        1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "_",
+        "1",
+        "_",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "_",
+        "1",
+        "_",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "_",
+        "_",
+        "#",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "_",
+        "_",
+        "#",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "_",
+        "_",
+        "0",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "_",
+        "_",
+        "0",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "_",
+        "_",
+        "1",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "_",
+        "_",
+        "1",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_RESTORE_PREP",
+      "reads": [
+        "_",
+        "_",
+        "_",
+        "1"
+      ],
+      "next_state": "BACK_RESTORE_PREP",
+      "writes": [
+        "_",
+        "_",
+        "_",
+        "_"
+      ],
+      "moves": [
+        0,
+        1,
+        0,
+        -1
+      ]
+    },
+    {
+      "state": "BACK_START",
+      "reads": [
+        "0",
+        "_",
+        "_",
+        "_"
+      ],
+      "next_state": "BACK_COPY",
+      "writes": [
+        "0",
+        "_",
+        "_",
+        "_"
+      ],
+      "moves": [
+        0,
+        -1,
+        0,
+        0
+      ]
+    }
+  ]
+}

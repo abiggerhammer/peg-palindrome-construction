@@ -1,0 +1,11 @@
+{
+  "algorithm_y_instances": 3,
+  "c": 16,
+  "candidate_representation": "monotone marker tapes",
+  "host_arithmetic_in_transitions": false,
+  "model": "ordinary one-head-per-tape checkpoint TM",
+  "operational_callbacks": false,
+  "sparse_rows": 765979,
+  "states": 484522,
+  "tapes": 63
+}

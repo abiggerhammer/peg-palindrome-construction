@@ -1,0 +1,61 @@
+{
+  "availability_forms": {
+    "case2": "need<=132421*avail+132420",
+    "case3": "need<=445989*avail+445988"
+  },
+  "cases": {
+    "1": {
+      "jump": 0,
+      "primitive_bound": 1433
+    },
+    "2": {
+      "affine": "231925*j+32916",
+      "geometry": [
+        "old_gap<j",
+        "old_active<4j",
+        "recover_source<=4j"
+      ],
+      "linear_coefficient": 264841
+    },
+    "3_at_end": {
+      "affine": "821*j+1934",
+      "linear_coefficient": 2755
+    },
+    "3_large": {
+      "affine": "859436*j+32541",
+      "geometry": [
+        "j=old_gap",
+        "source<=15j"
+      ],
+      "linear_coefficient": 891977
+    },
+    "3_small": {
+      "affine": "228355*j+32582",
+      "linear_coefficient": 260937,
+      "window": "first 4j active symbols decide all gaps <=j"
+    },
+    "3_uniform": {
+      "linear_coefficient": 891977
+    },
+    "4": {
+      "geometry": "new_active<5*new_gap",
+      "jump": 0,
+      "primitive_bound": 1468
+    }
+  },
+  "common": {
+    "dispatcher_bound": 1296,
+    "output_bound": 136
+  },
+  "date": "2026-07-25",
+  "manifest_sha256": "04c77caa345893211c6b52b9cd224a6caed268b47a1e776d329ad5c3d4c5a602",
+  "notation": {
+    "availability": "avail(u,a)=2*j-1",
+    "jump": "j=B(ua)-B(u)"
+  },
+  "remaining_obligation": "combine all six cases into one explicit (C,D) theorem before scheduler regeneration",
+  "scope": "READ0/READ1 through SOURCE_DONE_0/SOURCE_DONE_1; scheduler excluded",
+  "status": "proved within the corrected ordinary source construction",
+  "theorem": "Primitive predictability bounds for SG cases 1--4",
+  "transition_table_changed": false
+}

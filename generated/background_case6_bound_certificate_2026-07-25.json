@@ -1,0 +1,55 @@
+{
+  "date": "2026-07-25",
+  "status": {
+    "background_unit_bound": "proved",
+    "case5_primitive_per_input_bound": "proved",
+    "background_catchup_timing": "proved conditional on CheckpointCorrect for semantic emission",
+    "case6_two_job_bound": "proved",
+    "global_source_predictability_constant": "not yet proved",
+    "galil_scheduler": "quarantined"
+  },
+  "registered_component_costs": {
+    "history_append": 101,
+    "history_left": 21,
+    "history_right": 113,
+    "counter_fresh": 7,
+    "counter_increment": 7,
+    "counter_decrement": 5
+  },
+  "case5": {
+    "background_unit_body_bound": 506,
+    "background_unit_clock_overhead": 6,
+    "background_unit_global_bound": 512,
+    "cycle_logical_bound": {
+      "linear": 28400,
+      "constant": 16000
+    },
+    "required_units_per_input": 3479884,
+    "clock_outer": 1865,
+    "clock_radix": 1866,
+    "effective_units_per_input": 3480090,
+    "clock_build_primitive_bound": 13063,
+    "unclocked_input_prefix_bound": 560,
+    "primitive_per_input_bound": 1781819703,
+    "successful_installation": "constant-time after incremental candidate preposition",
+    "rejected_candidate": "incremental return recorded by GAP"
+  },
+  "case6": {
+    "fresh_source_length_relation": "n <= 16*j",
+    "stale_candidate_return_relation": "GAP < 2*j",
+    "outstanding_registered_lifecycle": "56580*n + 31054",
+    "fresh_recover_lifecycle": "57964*n + 31474",
+    "affine_bound": "1833274*j + 62538",
+    "linear_coefficient_for_j_ge_1": 1895812
+  },
+  "semantic_dependency": {
+    "name": "CheckpointCorrect",
+    "statement": "The ordinary reusable checkpoint and retained result/catch-up controller refine the specialized Lemma-3.3 recognizer and emit the correct candidate gap."
+  },
+  "retracted": [
+    "unbudgeted O(d) target-time candidate installation",
+    "124895 logical units as a producer-paid case-5 budget",
+    "scheduler predictability constant 161759"
+  ],
+  "source_manifest_sha256": "da0be2a2948b568c7a5b4d024ae642bbf55d48b20338fdfa46a78f6d2115b0d8"
+}

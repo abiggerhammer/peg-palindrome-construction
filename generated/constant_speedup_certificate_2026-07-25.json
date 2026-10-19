@@ -1,0 +1,25 @@
+{
+  "bounded_delay_transitions": 416945810716,
+  "construction": "repeat 39 times: pair adjacent tape symbols into one new symbol, retain the scanned pair and adjacent pairs in finite control, and tabulate two old transitions as one new transition",
+  "format": "Hartmanis-Stearns fixed-speedup application certificate v2",
+  "halving_iterations": 39,
+  "macrosteps_per_input": 1,
+  "not_claimed": [
+    "a materialized sped-up transition table",
+    "a small alphabet or finite control",
+    "optimality of the 39-iteration factor"
+  ],
+  "side_conditions": {
+    "capacity_at_least_delay": true,
+    "deterministic": true,
+    "fixed_bounded_delay": true,
+    "fixed_finite_machine": true,
+    "ordinary_one_cell_tape_moves": true,
+    "read_output_boundary_respected": true
+  },
+  "simulated_old_steps_per_new_step": 549755813888,
+  "spare_old_steps_per_input": 132810003172,
+  "speedup_ratio": "1/549755813888",
+  "status": "proved by application of imported constructive theorem; representation factored",
+  "theorem": "Hartmanis--Stearns constant speedup, Theorem 2, iterated k=1/2 construction"
+}

@@ -1,0 +1,34 @@
+Case-5 / case-6 proof-stage validation — 2026-07-25
+
+Selected non-scheduler tests completed successfully: 40
+
+  7  tests/test_background_bounds.py
+  3  tests/test_sg_controller.py
+  1  tests/test_sg_outer_constant_cases.py
+  1  tests/test_sg_outer_dispatcher_table.py
+  5  tests/test_sg_outer_remaining_cases.py (all five tests, run individually)
+  4  tests/test_sparse_registered_linker.py
+  2  tests/test_registered_component_service.py
+  3  tests/test_history_zipper_ordinary_tm.py
+  3  tests/test_checkpoint_lifecycle_bounds.py
+  4  tests/test_checkpoint_reusable_tm.py
+  2  tests/test_construction_constants_quarantine.py
+  2  tests/test_sg_outer_incremental.py
+  2  tests/test_sg_ordinary_background.py
+  1  tests/test_sg_all_ordinary_workers.py
+
+The five generated remaining-case regressions include:
+- case 2 differential recovery;
+- case 3 promotion/recovery subpaths;
+- repeated case sequence 3,1,2,1,4,5,6;
+- bounded local case-3 checkpoint;
+- paused case-5 checkpoint completed and retired by case 6.
+
+Source-manifest regeneration was run twice from source after the final repair.
+The outputs were byte-identical.
+SHA-256: da0be2a2948b568c7a5b4d024ae642bbf55d48b20338fdfa46a78f6d2115b0d8
+
+Not claimed here:
+- the scheduler-inclusive test suite (scheduler remains quarantined);
+- a full rerun of every unrelated workbench test;
+- proof of CheckpointCorrect (finite differential tests are evidence only).

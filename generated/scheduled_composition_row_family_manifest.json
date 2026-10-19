@@ -1,0 +1,111 @@
+{
+  "composition": {
+    "bounded_delay_transitions": 416945810716,
+    "buffer_call_rows": 7608,
+    "buffer_continuations": [
+      2,
+      5,
+      3,
+      4
+    ],
+    "buffer_service_rows": 232498,
+    "buffered_read_setup_bound": 102,
+    "compact_countdown_rows": 63,
+    "countdown_width_bits": 32,
+    "direct_read_setup_bound": 214,
+    "equal_completing_source_step_bound": 3,
+    "format": "factored ordinary SG/Galil composition certificate v2",
+    "input_history_append_bound": 101,
+    "input_history_ready_states": 1268,
+    "input_history_right_bound": 113,
+    "input_history_rows": 141888,
+    "input_history_states": 90606,
+    "lagged_completing_source_step_bound": 117,
+    "lagged_source_select_rows": 634,
+    "noncompleting_source_step_bound": 3,
+    "row_families": {
+      "clock": "62 non-tick rows plus the tick row split by FAST/SLOW mode",
+      "history_calls": "six call sites times 1268 reachable ready states",
+      "history_service": "one registered load row per history state, one active row per history row, four continuation rows",
+      "source_dispatch": "one exact 21-bit row per nonterminal source state",
+      "source_lift": "one row per certified source row"
+    },
+    "scheduled_states": 1653051,
+    "scheduled_total_rows": 8305403,
+    "scheduled_work_tapes": 295,
+    "scheduler_predictability_c": 1781819703,
+    "simulation_relation": {
+      "clock": "remaining source-step allowance in current physical interval",
+      "input_history": "physical input prefix, reader at simulated h1, writer after physical h2",
+      "lag": "unary h2-h1",
+      "mode": "Galil FAST/SLOW",
+      "source_q_bits": "little-endian encoding of source state",
+      "source_tapes": "identical to source configuration"
+    },
+    "small_controller_rows": 8309,
+    "source_dispatch_rows": 1562424,
+    "source_done_states": [
+      110,
+      111
+    ],
+    "source_entry_states": [
+      0,
+      1
+    ],
+    "source_row_product_factor": 1,
+    "source_rows": 6502172,
+    "source_state_bits": 21,
+    "source_states": 1562426,
+    "source_step_period": 3563639406,
+    "source_tapes": 225,
+    "status": "proved bounded-delay ordinary composition; fixed speedup imported separately",
+    "transformed_source_rows": 6502172,
+    "uniform_source_step_composition_bound": 117
+  },
+  "enumerated_families": {
+    "input_history_service": {
+      "rows": 232498,
+      "sha256": "708db806b5378f59bc6aa81675ac8cb28d8fb345c912aef051b92bece9bc021f"
+    },
+    "small_scheduler_controller": {
+      "rows": 8309,
+      "sha256": "75a8ce568320df725b8fdb2e028fa83b58fcc9b44dbf1c1a82569954c99fe867"
+    },
+    "source_dispatch": {
+      "rows": 1562424,
+      "sha256": "18e91081ef929d767d3ef93c1ca324cc54a7d3efc5deae86b8c475057345f126"
+    }
+  },
+  "fixed_speedup": {
+    "bounded_delay_transitions": 416945810716,
+    "construction": "repeat 39 times: pair adjacent tape symbols into one new symbol, retain the scanned pair and adjacent pairs in finite control, and tabulate two old transitions as one new transition",
+    "format": "Hartmanis-Stearns fixed-speedup application certificate v2",
+    "halving_iterations": 39,
+    "macrosteps_per_input": 1,
+    "not_claimed": [
+      "a materialized sped-up transition table",
+      "a small alphabet or finite control",
+      "optimality of the 39-iteration factor"
+    ],
+    "side_conditions": {
+      "capacity_at_least_delay": true,
+      "deterministic": true,
+      "fixed_bounded_delay": true,
+      "fixed_finite_machine": true,
+      "ordinary_one_cell_tape_moves": true,
+      "read_output_boundary_respected": true
+    },
+    "simulated_old_steps_per_new_step": 549755813888,
+    "spare_old_steps_per_input": 132810003172,
+    "speedup_ratio": "1/549755813888",
+    "status": "proved by application of imported constructive theorem; representation factored",
+    "theorem": "Hartmanis--Stearns constant speedup, Theorem 2, iterated k=1/2 construction"
+  },
+  "format": "scheduled composition row-family manifest v1",
+  "source_lift": {
+    "mapping": "pure lift_source_row, one output row per source row",
+    "rows": 6502172
+  },
+  "source_manifest_sha256": "fda6d4687e75d90d9cd2c300ec0c08c41d64a032f19792d372da7c4faea77f1f",
+  "status": "all new row families deterministically regenerated; source lift tied to certified source manifest"
+}

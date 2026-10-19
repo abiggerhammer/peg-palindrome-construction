@@ -1,0 +1,16 @@
+{
+  "stage": "registered SG outer dispatcher with complete cases 1 and 4",
+  "ordinary_tapes": 223,
+  "global_states": 1308476,
+  "service_body_rows": 3343562,
+  "dispatcher_rows": 35541,
+  "constant_case_rows": 7615,
+  "continuation_rows": 24,
+  "combined_rows": 3386742,
+  "completed_case_entries": [1, 4],
+  "remaining_case_entries": [2, 3, 5, 6],
+  "body": "outer_service_fabric_body.jsonl.gz",
+  "patch": "outer_dispatcher_patch.jsonl.gz",
+  "summary": "outer_dispatcher_stage_summary.json",
+  "machine_spec": "palindrome_machine_spec.json"
+}

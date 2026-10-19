@@ -1,0 +1,11 @@
+{
+  "c": 16,
+  "checkpoint_restarts_at_intermediate_prefixes": false,
+  "checkpoint_sparse_rows": 766211,
+  "checkpoint_states": 484701,
+  "checkpoint_tapes": 64,
+  "finite_controller_entries": 576,
+  "model": "persistent Lemma 3.3 controller around reusable ordinary checkpoint TM",
+  "ordinary_checkpoint_rows_per_search_tick": 1,
+  "remaining_terminal_lowering": "input-history append/read zipper for catch-up and launch copying"
+}

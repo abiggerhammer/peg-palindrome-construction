@@ -1,0 +1,52 @@
+{
+  "focused_test_groups": [
+    {
+      "group": "history zipper and terminal",
+      "status": "passed",
+      "tests": 5
+    },
+    {
+      "group": "ordinary Lemma 3.2 workers",
+      "status": "passed",
+      "tests": 2
+    },
+    {
+      "group": "terminal-backed persistent Lemma 3.3",
+      "status": "passed",
+      "tests": 2
+    },
+    {
+      "group": "SG all-ordinary workers",
+      "status": "passed",
+      "tests": 1
+    },
+    {
+      "group": "all-ordinary trace through Galil scheduler",
+      "status": "passed",
+      "tests": 2
+    },
+    {
+      "group": "sparse real-time PEG compiler",
+      "status": "passed",
+      "tests": 2
+    }
+  ],
+  "history_zipper": {
+    "rows": 139352,
+    "states": 88070,
+    "tapes": 12
+  },
+  "remaining": "outer B3/B3-prime cursor and result-marker product, then Galil scheduler table and PEG emission",
+  "reusable_checkpoint": {
+    "rows": 766211,
+    "states": 484701,
+    "tapes": 64
+  },
+  "sparse_realtime_peg_compiler": true,
+  "stage": "ordinary history terminal, all ordinary workers, sparse PEG backend",
+  "worker_backends": {
+    "background": "reusable checkpoint plus three ordinary history zippers",
+    "local": "ordinary checkpoint table over at most 4d symbols",
+    "recover": "ordinary checkpoint table"
+  }
+}

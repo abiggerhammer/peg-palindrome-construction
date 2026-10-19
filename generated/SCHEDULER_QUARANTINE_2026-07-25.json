@@ -1,0 +1,27 @@
+{
+  "date": "2026-07-25",
+  "status": "released at theorem and factored ordinary-composition level",
+  "former_problem": "The old source scheduler constant 161759 and the unrolled c=16 controller artifact were not justified by the corrected primitive source machine.",
+  "completed": [
+    "CheckpointCorrect",
+    "primitive predictability bounds for all six cases",
+    "global source theorem need(u,a) <= 947906*avail(u,a) + 1782767609",
+    "translation to Galil's two-part predictability condition",
+    "certified Galil constant c=1781819703",
+    "scheduler source-step period 2c=3563639406",
+    "compact exact 32-bit countdown with 63 sparse rows",
+    "ordinary factored source/scheduler composition with 295 work tapes, 1653051 states, and 8305403 rows",
+    "step-for-step simulation of the abstract FAST/SLOW scheduler",
+    "bounded delay K=416945810716",
+    "explicit Hartmanis-Stearns application with 39 halving iterations and capacity 2^39"
+  ],
+  "replacement_artifacts": [
+    "generated/galil_scheduler_c16.json",
+    "generated/scheduled_source_composition_certificate_2026-07-25.json",
+    "generated/constant_speedup_certificate_2026-07-25.json"
+  ],
+  "remaining": [
+    "symbolically compile the 39-layer speedup representation into scaffolding/PEG form without enumerating its block alphabet",
+    "run scheduler-inclusive PEG differential tests"
+  ]
+}

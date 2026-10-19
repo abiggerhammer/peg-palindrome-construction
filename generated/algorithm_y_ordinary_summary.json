@@ -1,0 +1,13 @@
+{
+  "halting_states": 318,
+  "maximum_microsteps_per_algorithm_y_step": 103,
+  "model": "ordinary one-head-per-tape TM",
+  "operational_callbacks": false,
+  "queue_role_permutations": 12,
+  "source_concrete_rows": 94824,
+  "source_schemata": 116,
+  "sparse_rows": 198751,
+  "stack_reset": "fresh bottom-marker epoch; two ordinary TM steps",
+  "states": 124926,
+  "tapes": 17
+}

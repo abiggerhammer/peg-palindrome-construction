@@ -1,0 +1,66 @@
+Cases 1--4 predictability proof validation
+Date: 2026-07-25
+
+1. New arithmetic and semantic proof tests plus SG reference audit
+   Command:
+     PYTHONPATH=. pytest -q tests/test_case14_predictability_bounds.py tests/test_sg_zero_ratio.py
+   Result:
+     10 passed in 0.52s
+
+2. Literal case-1/case-4 ordinary-table regression
+   Command:
+     PYTHONPATH=. pytest -q tests/test_sg_outer_constant_cases.py
+   Result:
+     1 passed in 15.47s
+
+3. Literal case-2 RECOVER regression
+   Command:
+     PYTHONPATH=. pytest -q tests/test_sg_outer_remaining_cases.py -k case2_shared_recover_matches_incremental_model
+   Result:
+     1 passed, 4 deselected in 20.12s
+
+4. Literal case-3 at-end/full regression
+   Command:
+     PYTHONPATH=. pytest -q tests/test_sg_outer_remaining_cases.py -k case3_promotion_and_subpaths_match_incremental_model
+   Result:
+     1 passed, 4 deselected in 19.55s
+
+5. Literal case-3 small-gap 4j-window regression
+   Command:
+     PYTHONPATH=. pytest -q tests/test_sg_outer_remaining_cases.py -k case3_small_gap_uses_bounded_local_checkpoint
+   Result:
+     1 passed, 4 deselected in 25.08s
+
+6. Corrected repeated six-case sequence
+   Command:
+     PYTHONPATH=. pytest -q tests/test_sg_outer_remaining_cases.py -k rebuilt_all_six_case_bodies_repeated_sequence
+   Result:
+     1 passed, 4 deselected in 23.01s
+
+7. CheckpointCorrect correspondence suite
+   Command:
+     PYTHONPATH=. PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 pytest -q tests/test_checkpoint_correctness.py
+   Result:
+     5 passed in 29.44s
+
+Total selected pytest results: 20 passed.
+
+Additional literal-step audit:
+  generated/case14_literal_step_audit_2026-07-25.json
+
+Representative measured steps / proved bound:
+  case 1:             636 / 1,433
+  case 2 (j=2):     3,930 / 496,766
+  case 4:             512 / 1,468
+  case 3 at end:      935 / 2,755
+  case 3 large:     2,853 / 891,977
+  case 3 small j=2:12,692 / 489,292
+
+The measurements are computational evidence only.  The coefficients are proved
+from the structural ledgers in CASES_1_4_PREDICTABILITY_PROOF_2026-07-25.md.
+
+Source manifest regeneration:
+  Two independent executions of regenerate_sg_source_manifest.py produced
+  byte-identical generated/sg_source_row_manifest.json.
+  SHA-256:
+  04c77caa345893211c6b52b9cd224a6caed268b47a1e776d329ad5c3d4c5a602

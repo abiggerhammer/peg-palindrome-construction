@@ -1,0 +1,42 @@
+SG missing-case rebuild regression record
+2026-07-24
+
+Heavy generated-machine tests were run as separate pytest processes.
+
+4 passed in 4.95s
+  tests/test_sparse_registered_linker.py
+
+1 passed in 14.28s
+  tests/test_sg_outer_dispatcher_table.py
+
+1 passed in 15.24s
+  tests/test_sg_outer_constant_cases.py
+
+1 passed in 20.95s
+  tests/test_sg_outer_remaining_cases.py::test_case2_shared_recover_matches_incremental_model
+
+1 passed in 21.21s
+  tests/test_sg_outer_remaining_cases.py::test_case3_promotion_and_subpaths_match_incremental_model
+
+1 passed in 24.13s
+  tests/test_sg_outer_remaining_cases.py::test_rebuilt_all_six_case_bodies_repeated_sequence
+
+1 passed in 25.18s
+  tests/test_sg_outer_remaining_cases.py::test_case3_small_gap_uses_bounded_local_checkpoint
+
+1 passed in 23.96s
+  tests/test_sg_outer_remaining_cases.py::test_case5_search_is_paused_and_case6_resumes_checkpoint
+
+2 passed in 17.52s
+  tests/test_sg_outer_incremental.py
+
+Total: 13 passed, 0 failed.
+
+Production construction check:
+  background budget: 124895
+  core remaining-case rows: 462234
+  streamed remaining-case rows: 1713145
+  named controller states: 125744
+  maximum named state: 125951 < 262144 reserve
+  maximum referenced tape: 223 < 224 tapes
+  complete source rows including service fabric: 5225334

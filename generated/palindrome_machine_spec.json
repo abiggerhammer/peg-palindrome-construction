@@ -1,0 +1,101 @@
+{
+  "audit_oracles_available": true,
+  "background_steps_per_input": 3479884,
+  "checkpoint_steps_per_frozen_symbol": 2048,
+  "components": [
+    {
+      "heads": 12,
+      "model": "one-head-per-tape sparse ordinary TM",
+      "name": "history_append_read_zipper",
+      "states": 90606,
+      "tapes": 12,
+      "transitions": 141888
+    },
+    {
+      "heads": 64,
+      "model": "one-head-per-tape sparse ordinary TM",
+      "name": "reusable_checkpoint",
+      "states": 484699,
+      "tapes": 64,
+      "transitions": 766209
+    },
+    {
+      "heads": 225,
+      "model": "225-tape sparse ordinary TM source with all six cases complete",
+      "name": "registered_complete_sg_source_fabric",
+      "states": 1562426,
+      "tapes": 225,
+      "transitions": 6502172
+    },
+    {
+      "heads": 4,
+      "model": "one-head-per-tape flat TM",
+      "name": "fischer_paterson_delta_primitive",
+      "states": 10,
+      "tapes": 4,
+      "transitions": 143
+    },
+    {
+      "heads": 6,
+      "model": "flat multihead TM",
+      "name": "three_pattern_prepare",
+      "states": 6,
+      "tapes": 4,
+      "transitions": 4425
+    },
+    {
+      "heads": 7,
+      "model": "flat multihead TM",
+      "name": "fischer_paterson_algorithm_y",
+      "states": 19,
+      "tapes": 5,
+      "transitions": 94824
+    },
+    {
+      "heads": null,
+      "model": "finite controller",
+      "name": "sg_six_case_controller",
+      "states": 1,
+      "tapes": null,
+      "transitions": 16
+    },
+    {
+      "heads": null,
+      "model": "finite controller",
+      "name": "persistent_lemma33_controller",
+      "states": 6,
+      "tapes": null,
+      "transitions": 576
+    },
+    {
+      "heads": 295,
+      "model": "factored ordinary one-head-per-tape FAST/SLOW composition",
+      "name": "scheduled_sg_bounded_delay_machine",
+      "states": 1653051,
+      "tapes": 295,
+      "transitions": 8305403
+    }
+  ],
+  "composition": [
+    "registered sum-composition links nine history zippers, one reusable checkpoint, and twelve unary counters without a Cartesian state product",
+    "literal outer dispatcher appends the input, advances midpoint/left cursors, updates signed k, and selects all six SG cases",
+    "all six SG cases are complete through SOURCE_DONE_0/1 with producer-paid cleanup and proved primitive predictability bounds",
+    "the proved Galil fast/slow parameters are represented by a compact 32-bit fixed countdown rather than 21 billion unrolled clock rows",
+    "the source and scheduler are composed in an 8,305,403-row factored ordinary machine with bounded delay 416,945,810,716",
+    "39 iterations of the constructive Hartmanis--Stearns halving transformation yield conventional real time",
+    "the remaining PEG step is a symbolic compiler for the factored speedup representation"
+  ],
+  "language": "{w w^R : w in {0,1}*}",
+  "operational_oracles": false,
+  "scheduled_bounded_delay": 416945810716,
+  "scheduled_rows": 8305403,
+  "scheduled_states": 1653051,
+  "scheduled_work_tapes": 295,
+  "scheduler_clock_width_bits": 32,
+  "scheduler_compact_clock_rows": 63,
+  "scheduler_predictability_constant": 1781819703,
+  "scheduler_source_step_period": 3563639406,
+  "source_ratio_c": 16,
+  "speedup_halving_iterations": 39,
+  "speedup_macro_capacity": 549755813888
+}

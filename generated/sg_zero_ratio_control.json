@@ -1,0 +1,210 @@
+[
+  {
+    "action": {
+      "case": "SIX_SECOND_UNKNOWN_FIRST_FAILS",
+      "promote_second": false,
+      "retain_second": false,
+      "second_known_after": true,
+      "worker": "RECOVER"
+    },
+    "b_survives": false,
+    "bp_survives": false,
+    "gap_large": false,
+    "second_known": false
+  },
+  {
+    "action": {
+      "case": "SIX_SECOND_UNKNOWN_FIRST_FAILS",
+      "promote_second": false,
+      "retain_second": false,
+      "second_known_after": true,
+      "worker": "RECOVER"
+    },
+    "b_survives": false,
+    "bp_survives": false,
+    "gap_large": true,
+    "second_known": false
+  },
+  {
+    "action": {
+      "case": "SIX_SECOND_UNKNOWN_FIRST_FAILS",
+      "promote_second": false,
+      "retain_second": false,
+      "second_known_after": true,
+      "worker": "RECOVER"
+    },
+    "b_survives": false,
+    "bp_survives": true,
+    "gap_large": false,
+    "second_known": false
+  },
+  {
+    "action": {
+      "case": "SIX_SECOND_UNKNOWN_FIRST_FAILS",
+      "promote_second": false,
+      "retain_second": false,
+      "second_known_after": true,
+      "worker": "RECOVER"
+    },
+    "b_survives": false,
+    "bp_survives": true,
+    "gap_large": true,
+    "second_known": false
+  },
+  {
+    "action": {
+      "case": "FIVE_SECOND_UNKNOWN_FIRST_SURVIVES",
+      "promote_second": false,
+      "retain_second": false,
+      "second_known_after": null,
+      "worker": "ADVANCE_BACKGROUND"
+    },
+    "b_survives": true,
+    "bp_survives": false,
+    "gap_large": false,
+    "second_known": false
+  },
+  {
+    "action": {
+      "case": "FIVE_SECOND_UNKNOWN_FIRST_SURVIVES",
+      "promote_second": false,
+      "retain_second": false,
+      "second_known_after": null,
+      "worker": "ADVANCE_BACKGROUND"
+    },
+    "b_survives": true,
+    "bp_survives": false,
+    "gap_large": true,
+    "second_known": false
+  },
+  {
+    "action": {
+      "case": "FIVE_SECOND_UNKNOWN_FIRST_SURVIVES",
+      "promote_second": false,
+      "retain_second": false,
+      "second_known_after": null,
+      "worker": "ADVANCE_BACKGROUND"
+    },
+    "b_survives": true,
+    "bp_survives": true,
+    "gap_large": false,
+    "second_known": false
+  },
+  {
+    "action": {
+      "case": "FIVE_SECOND_UNKNOWN_FIRST_SURVIVES",
+      "promote_second": false,
+      "retain_second": false,
+      "second_known_after": null,
+      "worker": "ADVANCE_BACKGROUND"
+    },
+    "b_survives": true,
+    "bp_survives": true,
+    "gap_large": true,
+    "second_known": false
+  },
+  {
+    "action": {
+      "case": "TWO_BOTH_FAIL",
+      "promote_second": false,
+      "retain_second": false,
+      "second_known_after": true,
+      "worker": "RECOVER"
+    },
+    "b_survives": false,
+    "bp_survives": false,
+    "gap_large": false,
+    "second_known": true
+  },
+  {
+    "action": {
+      "case": "TWO_BOTH_FAIL",
+      "promote_second": false,
+      "retain_second": false,
+      "second_known_after": true,
+      "worker": "RECOVER"
+    },
+    "b_survives": false,
+    "bp_survives": false,
+    "gap_large": true,
+    "second_known": true
+  },
+  {
+    "action": {
+      "case": "THREE_SECOND_SURVIVES",
+      "promote_second": true,
+      "retain_second": false,
+      "second_known_after": null,
+      "worker": "LOCAL"
+    },
+    "b_survives": false,
+    "bp_survives": true,
+    "gap_large": false,
+    "second_known": true
+  },
+  {
+    "action": {
+      "case": "THREE_SECOND_SURVIVES",
+      "promote_second": true,
+      "retain_second": false,
+      "second_known_after": true,
+      "worker": "RECOVER"
+    },
+    "b_survives": false,
+    "bp_survives": true,
+    "gap_large": true,
+    "second_known": true
+  },
+  {
+    "action": {
+      "case": "FOUR_FIRST_SURVIVES",
+      "promote_second": false,
+      "retain_second": false,
+      "second_known_after": false,
+      "worker": "START_BACKGROUND"
+    },
+    "b_survives": true,
+    "bp_survives": false,
+    "gap_large": false,
+    "second_known": true
+  },
+  {
+    "action": {
+      "case": "FOUR_FIRST_SURVIVES",
+      "promote_second": false,
+      "retain_second": false,
+      "second_known_after": false,
+      "worker": "START_BACKGROUND"
+    },
+    "b_survives": true,
+    "bp_survives": false,
+    "gap_large": true,
+    "second_known": true
+  },
+  {
+    "action": {
+      "case": "ONE_BOTH_SURVIVE",
+      "promote_second": false,
+      "retain_second": true,
+      "second_known_after": true,
+      "worker": "NONE"
+    },
+    "b_survives": true,
+    "bp_survives": true,
+    "gap_large": false,
+    "second_known": true
+  },
+  {
+    "action": {
+      "case": "ONE_BOTH_SURVIVE",
+      "promote_second": false,
+      "retain_second": true,
+      "second_known_after": true,
+      "worker": "NONE"
+    },
+    "b_survives": true,
+    "bp_survives": true,
+    "gap_large": true,
+    "second_known": true
+  }
+]

@@ -1,0 +1,43 @@
+{
+  "background_clock_outer": 1865,
+  "background_clock_radix": 1866,
+  "background_effective_units": 3480090,
+  "background_required_units": 3479884,
+  "background_steps_per_input": 3479884,
+  "background_unit_global_bound": 512,
+  "case1_primitive_bound": 1433,
+  "case2_predictability_coefficient": 264841,
+  "case3_predictability_coefficient": 891977,
+  "case4_primitive_bound": 1468,
+  "case5_primitive_per_input_bound": 1781819703,
+  "case6_predictability_coefficient": 1895812,
+  "checkpoint_clean_ready_state": 461838,
+  "checkpoint_result_ready_state": 99227,
+  "constant_case_rows": 7615,
+  "continuations": 2444,
+  "controller_rows": 3156170,
+  "controller_state_reserve": 262144,
+  "dispatcher_rows": 35541,
+  "format": "complete SG source row manifest v2",
+  "galil_predictability_c": 1781819703,
+  "galil_scheduler_source_step_period": 3563639406,
+  "global_states": 1562426,
+  "global_tapes": 225,
+  "max_controller_row_state": 2935,
+  "max_global_row_state": 1562417,
+  "max_referenced_tape": 224,
+  "remaining_case_rows": 3113014,
+  "service_rows": 3346002,
+  "source_done_states": {
+    "0": 110,
+    "1": 111
+  },
+  "source_entry_states": {
+    "0": 0,
+    "1": 1
+  },
+  "source_predictability_affine_C": 947906,
+  "source_predictability_affine_D": 1782767609,
+  "status": "transition families rebuilt after producer-paid cleanup, CheckpointCorrect, all six primitive bounds, and the global predictability theorem; compact scheduler parameters proved but physical scheduler excluded",
+  "total_rows": 6502172
+}

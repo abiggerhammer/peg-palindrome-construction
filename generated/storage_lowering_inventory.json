@@ -1,0 +1,63 @@
+{
+  "algorithm_y": {
+    "lowered_tapes": 6,
+    "read_only_source_tapes": [
+      0
+    ],
+    "remaining_shared_tapes": [
+      2
+    ],
+    "residual_units": [
+      {
+        "append_writer_heads": [
+          3
+        ],
+        "head_stats": [
+          {
+            "ever_changes": false,
+            "head": 2,
+            "moves": [
+              -1,
+              0,
+              1
+            ],
+            "preserves": true,
+            "writes_nonblank_only_on_blank": true
+          },
+          {
+            "ever_changes": true,
+            "head": 3,
+            "moves": [
+              0,
+              1
+            ],
+            "preserves": false,
+            "writes_nonblank_only_on_blank": true
+          }
+        ],
+        "heads": [
+          2,
+          3
+        ],
+        "is_append_read_unit": true,
+        "reader_heads": [
+          2
+        ],
+        "tape": 2
+      }
+    ],
+    "source_heads": 7,
+    "source_tapes": 5
+  },
+  "conclusion": "All frozen-pattern multihead access is eliminated exactly by duplication. The sole remaining shared storage primitive is Algorithm Y's unary-Delta append/read unit (C movable reader, D right-moving append-only writer).",
+  "three_pattern_prepare": {
+    "lowered_tapes": 6,
+    "ordinary_multitape_complete": true,
+    "read_only_source_tapes": [
+      0
+    ],
+    "remaining_shared_tapes": [],
+    "source_heads": 6,
+    "source_tapes": 4
+  }
+}

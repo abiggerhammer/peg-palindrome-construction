@@ -1,0 +1,50 @@
+{
+  "availability": "avail(u,a)=2*(B(ua)-B(u))-1",
+  "cases": {
+    "1": {
+      "jump": 0,
+      "need_bound": 1433
+    },
+    "2": {
+      "jump": "j>=1",
+      "need_bound": "264841*j"
+    },
+    "3": {
+      "jump": "j>=1",
+      "need_bound": "891977*j"
+    },
+    "4": {
+      "jump": 0,
+      "need_bound": 1468
+    },
+    "5": {
+      "jump": 0,
+      "need_bound": 1781819703
+    },
+    "6": {
+      "jump": "j>=1",
+      "need_bound": "1895812*j"
+    }
+  },
+  "constants": {
+    "C": 947906,
+    "D": 1782767609
+  },
+  "date": "2026-07-25",
+  "galil_translation": {
+    "case1_bound": 1433,
+    "case2_j_coefficient": 264841,
+    "case3_j_coefficient": 891977,
+    "case4_bound": 1468,
+    "case5_bound": 1781819703,
+    "case6_j_coefficient": 1895812,
+    "countdown_width_bits": 32,
+    "galil_predictability_c": 1781819703,
+    "scheduler_source_step_period": 3563639406,
+    "source_affine_C": 947906,
+    "source_affine_D": 1782767609,
+    "source_ratio_c": 16
+  },
+  "status": "proved",
+  "theorem": "need(u,a) <= 947906*avail(u,a) + 1782767609"
+}
