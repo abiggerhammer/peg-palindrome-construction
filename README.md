@@ -2,6 +2,8 @@
 
 **Status: research release for independent audit. Not peer reviewed or proof-assistant checked.**
 
+**New to the problem? Start with [EXPLAINER.md](EXPLAINER.md).** It explains why an even-palindrome CFG is trivial but an ordinary PEG is not, why Conjecture 7 matters, and exactly what this construction claims and still needs reviewed. No knowledge of scaffolding automata is assumed.
+
 This repository documents a July 25, 2026 AI-assisted construction, developed under the direction of **Meredith L. Patterson** with OpenAI's Sol, that purports to establish the existence of a **finite ordinary parsing expression grammar (PEG)** for the complete language of binary even-length palindromes:
 
 ```text
@@ -40,11 +42,12 @@ The configured machine has 295 work tapes and 1,653,051 states; the scaffold deg
 
 ## What to read
 
-1. **[PROOF_OVERVIEW.md](PROOF_OVERVIEW.md)** — human-readable dependency graph and theorem boundary.
-2. **[PALINDROME_PEG_EXISTENCE_CHECKPOINT_2026-07-25.md](PALINDROME_PEG_EXISTENCE_CHECKPOINT_2026-07-25.md)** — final existence checkpoint with formal finiteness and the rule-expansion argument.
-3. **[PALINDROME_INDEXED_PEG_AUDIT_2026-07-25.md](PALINDROME_INDEXED_PEG_AUDIT_2026-07-25.md)** — correspondence with the standard Loff–Moreira–Reis construction.
-4. **[CHECKPOINT_CORRECT_PROOF_2026-07-25.md](CHECKPOINT_CORRECT_PROOF_2026-07-25.md)**, **[SIX_CASE_PREDICTABILITY_THEOREM_2026-07-25.md](SIX_CASE_PREDICTABILITY_THEOREM_2026-07-25.md)**, and **[SCHEDULER_SOURCE_COMPOSITION_PROOF_2026-07-25.md](SCHEDULER_SOURCE_COMPOSITION_PROOF_2026-07-25.md)** — source and scheduler dependencies.
-5. **[notes/REALTIME_TM_REVERSE_PEG_THEOREM_AUDIT_2026-07-25.md](notes/REALTIME_TM_REVERSE_PEG_THEOREM_AUDIT_2026-07-25.md)** — separate, unreviewed generic theorem proposed by the same work.
+1. **[EXPLAINER.md](EXPLAINER.md)** — start here if you're new to CFGs versus PEGs, or want the intuition before the technical proof.
+2. **[PROOF_OVERVIEW.md](PROOF_OVERVIEW.md)** — human-readable dependency graph and theorem boundary.
+3. **[PALINDROME_PEG_EXISTENCE_CHECKPOINT_2026-07-25.md](PALINDROME_PEG_EXISTENCE_CHECKPOINT_2026-07-25.md)** — final existence checkpoint with formal finiteness and the rule-expansion argument.
+4. **[PALINDROME_INDEXED_PEG_AUDIT_2026-07-25.md](PALINDROME_INDEXED_PEG_AUDIT_2026-07-25.md)** — correspondence with the standard Loff–Moreira–Reis construction.
+5. **[CHECKPOINT_CORRECT_PROOF_2026-07-25.md](CHECKPOINT_CORRECT_PROOF_2026-07-25.md)**, **[SIX_CASE_PREDICTABILITY_THEOREM_2026-07-25.md](SIX_CASE_PREDICTABILITY_THEOREM_2026-07-25.md)**, and **[SCHEDULER_SOURCE_COMPOSITION_PROOF_2026-07-25.md](SCHEDULER_SOURCE_COMPOSITION_PROOF_2026-07-25.md)** — source and scheduler dependencies.
+6. **[notes/REALTIME_TM_REVERSE_PEG_THEOREM_AUDIT_2026-07-25.md](notes/REALTIME_TM_REVERSE_PEG_THEOREM_AUDIT_2026-07-25.md)** — separate, unreviewed generic theorem proposed by the same work.
 
 The generator entry point is [`compile_palindrome_succinct_peg.py`](compile_palindrome_succinct_peg.py), the indexed PEG schema is [`generated/palindrome_reverse.speg.json`](generated/palindrome_reverse.speg.json), and rule-expansion code is in [`indexed_block_macro_expander.py`](indexed_block_macro_expander.py) and [`lmr_rule_expander.py`](lmr_rule_expander.py).
 
