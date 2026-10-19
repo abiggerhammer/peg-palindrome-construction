@@ -59,13 +59,11 @@ The generator entry point is [`compile_palindrome_succinct_peg.py`](compile_pali
 ## Basic validation
 
 ```bash
+python tools/verify_release_artifacts.py
 python -m pytest -q tests/test_indexed_peg_expander.py
-sha256sum generated/palindrome_reverse.speg.json \
-  generated/palindrome_peg_compiler_certificate.json \
-  generated/palindrome_indexed_rule_audit.json
 ```
 
-The four indexed-expander tests passed in a fresh October 19, 2026 rerun. Other tests can be slow; the historical test results are recorded in `*_TEST_RESULTS_2026-07-25.txt`. No claim is made here that the entire suite has just been rerun. For the exact expected digests, see [AUDIT_STATUS.md](AUDIT_STATUS.md).
+The verifier checks SHA-256 against the pinned July 25 release for all seven generated compressed tables, the final indexed schema, two certificates, and the proof audit document. The four indexed-expander tests and three further targeted scheduler/compiler tests passed in an October 19, 2026 rerun. The [release integrity GitHub Actions workflow](.github/workflows/release-integrity.yml) reproduces this bounded subset on a clean checkout; it is not a full test-suite or mathematical proof check. Some tests can be slow; historical results are recorded in `*_TEST_RESULTS_2026-07-25.txt`. See [AUDIT_STATUS.md](AUDIT_STATUS.md) for the precise scope and limitations.
 
 ## What we want reviewed
 
