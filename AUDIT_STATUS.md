@@ -27,6 +27,14 @@ The original workbench commit was `be2bc10d2d8661b8e3d8ba2dab664c3c43150b71`.
 
 Do not interpret the project's JSON 'certificates' as proof-assistant certificates, and do not infer full-grammar materialization from tests on reduced machines.
 
+## GitHub completeness and targeted verification (October 19, 2026)
+
+- All seven archived compressed tables are now published in `main`, the final six in GitHub commit [`13e9707`](https://github.com/abiggerhammer/peg-palindrome-construction/commit/13e970716bdb5693e7fc16d451c175f7ddd5c8bc). Their Git blob SHA-1 identifiers and byte lengths match the original July 25 archive, whose SHA-256 hashes match [DATA_FILES.md](DATA_FILES.md).
+- The Python schema, two machine-readable certificates, and the final indexed audit proof document also match the pinned archive SHA-256 values.
+- From the restored release archive on Python 3.13.5 / pytest 9.0.2, seven targeted tests passed: four in `tests/test_indexed_peg_expander.py`, plus the public composition constants, source state-bit updates, and sparse-compiler differing-tape-alphabet tests. The six central source/test modules used by the expander test were additionally matched by Git blob SHA-1 against GitHub.
+- An attempted broader six-module selection was incomplete after four passing tests and a 105-second execution limit. This was a **timeout, not a failure or a complete passing suite**. Some remaining tests have substantial resource costs.
+- `python tools/verify_release_artifacts.py` is the archive integrity command. The [release integrity workflow](.github/workflows/release-integrity.yml) runs this check plus the targeted tests on a GitHub-hosted clean checkout. CI execution is distinct from, and does not replace, mathematical peer review.
+
 ## Before making strong academic claims
 
 Seek independent review of the Seiferas–Galil specialization and its correctness; validate scheduling and the quantitative bounds; separately audit the scaffold-to-ordinary-PEG expansion against the Loff–Moreira–Reis characterization; check the empty input and acceptance conventions; and make test commands, dependencies, and a minimal reproducibility case easy for reviewers to run. Submit a full written proof to a peer-reviewed venue after that.
