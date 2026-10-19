@@ -1,0 +1,42 @@
+{
+  "block_size": 549755813888,
+  "claim_boundary": {
+    "not_claimed": [
+      "physical materialization of the astronomical ordinary PEG text",
+      "practical completion time for exhaustive expansion",
+      "independent external verification or publication-level acceptance"
+    ],
+    "proved_within_construction": [
+      "finite exact working-label and radius-two neighbourhood domains",
+      "unique nonreentered synthetic initial state",
+      "total scaffolding delta via explicit rejecting sink completion",
+      "block locality and radius-two persistent update",
+      "finite compile-time ordinary-row transition oracle",
+      "line-for-line standard LMR State/Label/Neighbourhood/Path/Transition expansion",
+      "literal ordinary-PEG correctness on reduced bounded-delay machines",
+      "existence of a finite ordinary PEG for even palindromes"
+    ]
+  },
+  "compiler_entrypoint": "compile_palindrome_succinct_peg.main",
+  "definition_audit_path": "generated/palindrome_indexed_rule_audit.json",
+  "definition_audit_sha256": "215894eb65e4544401304b6747e9fa5d97134a96ad9709e467c77064207b056e",
+  "delay_bound": 416945810716,
+  "format": "palindrome finite ordinary-PEG compiler certificate v3",
+  "grammar_path": "generated/palindrome_reverse.speg.json",
+  "grammar_sha256": "2d208065f425c2c6415223d80e7ead4104e5fbf556e656d4b28d9b4f5de7ed0c",
+  "minimum_indexed_block_cell_coordinates": 486533895290880,
+  "optional_squaring_layers": 39,
+  "ordinary_rule_expanders": [
+    "indexed_block_macro_expander",
+    "lmr_rule_expander"
+  ],
+  "path_predicates": 348691,
+  "row_enumerator_entrypoint": "enumerate_scheduled_rows.iter_scheduled_rows",
+  "scaffold_degree": 590,
+  "scaffold_radius": 2,
+  "small_instance_literal_backend": "bounded_delay_macro_compiler.compile_small_bounded_delay_to_peg",
+  "source_row_family_manifest": "generated/scheduled_composition_row_family_manifest.json",
+  "source_row_family_manifest_sha256": "ce75943a912c7fb170f756881a5d3d840d2640d75f225f7ff5aed2fbda25b1f2",
+  "state_predicates": 6,
+  "status": "explicit finite ordinary-PEG generation algorithm complete; the ordinary text is astronomical and retained as exact finite indexed comprehensions"
+}

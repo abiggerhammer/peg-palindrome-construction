@@ -1,0 +1,55 @@
+CheckpointCorrect implementation-correspondence validation
+Date: 2026-07-25
+Base commit: 7fd2d8dc98ddf4f2432693a7a0804420fe873616
+
+Status: PASS
+
+Unique selected non-scheduler tests: 44 passed
+
+Successful invocations:
+
+1. tests/test_checkpoint_correctness.py
+   5 passed
+   - independent failure-chain gap characterization through binary length 13
+   - exact c=16 ratio arithmetic for n<=512
+   - literal ordinary checkpoint against independent spec through length 7
+   - row-for-row reusable lifting
+   - exact Algorithm-Y boundary microprogram maximum
+
+2. tests/test_fp_algorithm_y_multihead.py + tests/test_algorithm_y_strict_storage.py
+   6 passed
+
+3. tests/test_algorithm_y_ordinary_tm.py
+   3 passed
+
+4. tests/test_checkpoint_ordinary_tm.py
+   4 passed
+
+5. tests/test_checkpoint_reusable_tm.py
+   4 passed
+
+6. tests/test_history_zipper_ordinary_tm.py + tests/test_history_zipper_reset.py
+   + tests/test_ordinary_history_terminal.py
+   7 passed
+
+7. tests/test_lemma33_checkpoint_terminal.py
+   2 passed
+
+8. tests/test_lemma33_checkpoint_ordinary.py + tests/test_lemma33_controller.py
+   8 passed
+
+9. tests/test_realtime_queue.py
+   3 passed
+
+10. tests/test_algorithm_y_append_read.py
+    2 passed
+
+The complete source manifest was regenerated once.  It remained byte-identical
+to the committed manifest:
+
+da0be2a2948b568c7a5b4d024ae642bbf55d48b20338fdfa46a78f6d2115b0d8  generated/sg_source_row_manifest.json
+
+A second full manifest regeneration was attempted but exceeded the execution
+window.  No determinism claim is based on that incomplete second run.  Since
+this checkpoint changes proof/test/status files only, `git diff` confirms that
+the committed source manifest and all transition generators are unchanged.

@@ -1,0 +1,37 @@
+Palindrome indexed ordinary-PEG checkpoint test record
+Date: 2026-07-25
+
+Command:
+  PYTHONPATH=. pytest -q tests/test_indexed_peg_expander.py tests/test_succinct_block_peg.py
+Result:
+  5 passed in 24.55s
+
+Command:
+  PYTHONPATH=. pytest -q tests/test_bounded_delay_macro_compiler.py tests/test_sparse_realtime_compiler.py tests/test_anbn.py tests/test_randomized_compiler.py
+Result:
+  7 passed in 19.08s
+
+Command:
+  PYTHONPATH=. pytest -q tests/test_predictability_scheduler.py tests/test_scheduler_parameters.py tests/test_scheduled_source_composition.py
+Result:
+  18 passed in 14.18s
+
+Confirmed total:
+  30 passed, 0 failed
+
+Deterministic regeneration:
+  generated/palindrome_reverse.speg.json regenerated twice identically
+  generated/palindrome_peg_compiler_certificate.json regenerated twice identically
+  generated/palindrome_indexed_rule_audit.json regenerated twice identically
+  PALINDROME_INDEXED_PEG_AUDIT_2026-07-25.md regenerated twice identically
+
+File SHA-256:
+  7e3f7cab9af2c53b679b8da3ac486c6993824a939c4d689f3e37f9718c20f8f9  generated/palindrome_reverse.speg.json
+  b3d5281635ff12e85d4b3f30f3b3e38bfb3a4749ddd6339ca9f815cbe40fc089  generated/palindrome_peg_compiler_certificate.json
+  215894eb65e4544401304b6747e9fa5d97134a96ad9709e467c77064207b056e  generated/palindrome_indexed_rule_audit.json
+  ad6851b1aff201a31b530a8073b075ead54ac798931b26872e559bb90f66e2fc  PALINDROME_INDEXED_PEG_AUDIT_2026-07-25.md
+
+Notes:
+- The selected tests are divided into chunks because the complete workbench suite contains expensive checkpoint/table-generation tests.
+- No failing test was observed in the listed runs.
+- The full astronomical ordinary PEG text was not materialized.

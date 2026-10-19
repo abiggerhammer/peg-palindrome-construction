@@ -1,0 +1,51 @@
+Scheduler/source composition and fixed-speedup audit
+Date: 2026-07-25
+
+Command:
+  PYTHONPATH=. pytest -q \
+    tests/test_predictability_scheduler.py \
+    tests/test_scheduler_table.py \
+    tests/test_scheduler_parameters.py \
+    tests/test_sg_scheduler_audit.py \
+    tests/test_sg_all_ordinary_scheduler.py \
+    tests/test_scheduled_source_composition.py \
+    tests/test_constant_speedup.py
+
+Result:
+  25 passed in 22.63s
+
+New composition-specific checks:
+- exact 295-tape / 1,653,051-state / 8,305,403-row inventory;
+- exact source-state bit updates;
+- literal enumeration/count of all history service, history call,
+  lagged-source-selection, completion, and clock families;
+- one-for-one source-row lifting on representative sparse rows and the actual
+  35,541-row dispatcher plus 7,615-row constant-case families;
+- exhaustive short trace agreement with the independent compact scheduler;
+- FIFO read-ahead and lagged-completion exercise;
+- exact Hartmanis--Stearns factor: 39 halvings, capacity 2^39.
+
+Important classification:
+- Passing tests are computational evidence.
+- The composition and delay theorem are established structurally in
+  SCHEDULER_SOURCE_COMPOSITION_PROOF_2026-07-25.md.
+- The final speedup is an explicit application of the imported constructive
+  Hartmanis--Stearns theorem, not a finite test result.
+
+Supporting arithmetic/source-bound command:
+  PYTHONPATH=. pytest -q \
+    tests/test_construction_constants_quarantine.py \
+    tests/test_case14_predictability_bounds.py \
+    tests/test_background_bounds.py
+
+Result:
+  14 passed in 20.23s
+
+Deterministic generation:
+  regenerate_scheduled_composition.py was run twice.
+  generated/scheduled_composition_row_family_manifest.json was byte-identical.
+  SHA-256: ce75943a912c7fb170f756881a5d3d840d2640d75f225f7ff5aed2fbda25b1f2
+
+A broader command that also included the expensive checkpoint-correctness and
+lifecycle suites reached the execution cap after 17 completed tests and no
+reported failure.  Those source components were not modified in this stage.

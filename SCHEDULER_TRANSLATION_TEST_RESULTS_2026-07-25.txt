@@ -1,0 +1,39 @@
+Galil scheduler translation and compact-clock validation
+Date: 2026-07-25
+
+Changed-surface scheduler suite:
+  PYTHONPATH=. pytest -q \
+    tests/test_scheduler_parameters.py \
+    tests/test_predictability_scheduler.py \
+    tests/test_scheduler_table.py \
+    tests/test_construction_constants_quarantine.py \
+    tests/test_sg_scheduler_audit.py \
+    tests/test_sg_all_ordinary_scheduler.py
+Result: 19 passed in 13.44s
+
+Imported bound certificates:
+  PYTHONPATH=. pytest -q \
+    tests/test_case14_predictability_bounds.py \
+    tests/test_background_bounds.py
+Result: 12 passed in 20.22s
+
+Static compilation:
+  python -m compileall -q .
+Result: passed
+
+Compact scheduler regeneration:
+  two independent calls to regenerate_galil_scheduler.main
+Result: byte-identical
+SHA-256:
+  d11d97e4c4e0632a2ef0ac0d4fd9d5d9d07f5f87fbb410b2826184747638eb71
+
+Source manifest regeneration:
+  regenerate_sg_source_manifest.main('/tmp/source_manifest_check.json')
+Result: byte-identical to generated/sg_source_row_manifest.json
+SHA-256:
+  fda6d4687e75d90d9cd2c300ec0c08c41d64a032f19792d372da7c4faea77f1f
+
+The complete 176-test repository suite was also attempted, but exceeded the
+10-minute execution limit before completion.  No failure was reported before
+the timeout.  The focused tests above cover every changed module and generated
+scheduler interface; previously proved source/checkpoint code was not changed.

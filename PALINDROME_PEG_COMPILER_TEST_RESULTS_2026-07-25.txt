@@ -1,0 +1,41 @@
+Symbolic block-macro PEG compiler test record
+Date: 2026-07-25
+
+Build and deterministic regeneration
+------------------------------------
+python -m compileall -q .
+PASS
+
+python compile_palindrome_succinct_peg.py
+run twice; generated schema and certificate compared byte-for-byte
+PASS
+
+Compiler-focused suite
+----------------------
+pytest -q \
+  tests/test_bounded_delay_macro_compiler.py \
+  tests/test_succinct_block_peg.py \
+  tests/test_randomized_compiler.py \
+  tests/test_sparse_realtime_compiler.py \
+  tests/test_anbn.py
+
+8 passed in 21.75s
+
+Scheduler/source supporting suite
+---------------------------------
+PYTHONPATH=. pytest -q \
+  tests/test_scheduled_source_composition.py \
+  tests/test_constant_speedup.py \
+  tests/test_predictability_scheduler.py \
+  tests/test_scheduler_parameters.py
+
+19 passed in 14.13s
+
+Selected total
+--------------
+27 passed, 0 failed
+
+Generated file SHA-256
+---------------------
+3043eda7b34bf6aa6c01fbd8fbd3ae1411f0a5c1a9cb5e9ed336e5ee28597a0b  generated/palindrome_reverse.speg.json
+b01fd02a73f2c520bc7da4eadf1768fc5c9fa411f63fb5d10f08950f822e1dad  generated/palindrome_peg_compiler_certificate.json

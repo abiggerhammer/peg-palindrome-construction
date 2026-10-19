@@ -1,0 +1,5438 @@
+{
+  "block_size": 549755813888,
+  "compile_time_transition_oracle": {
+    "algorithm": [
+      "enumerate (state, input symbol, exact radius-two neighbourhood)",
+      "if state is INITIAL and the neighbourhood is the trivial base, use the blank machine configuration",
+      "if state is normal and the neighbourhood decodes as a canonical block snapshot, materialize its three blocks per tape",
+      "simulate the deterministic ordinary row stream until the next physical-input boundary",
+      "reject the certificate if more than 416945810716 primitive transitions occur",
+      "compute the next normal state, exact whole working label, and 2*tapes radius-two edge targets",
+      "for every other index emit the fixed rejecting SINK transition",
+      "fold the resulting total finite delta table into the ordinary LMR rule alternatives"
+    ],
+    "executable_components": {
+      "row_stream": "enumerate_scheduled_rows.iter_scheduled_rows",
+      "selected_rule_expander": "indexed_block_macro_expander",
+      "small_literal_backend": "bounded_delay_macro_compiler.compile_small_bounded_delay_to_peg"
+    },
+    "manifest": "generated/scheduled_composition_row_family_manifest.json",
+    "manifest_sha256": "ce75943a912c7fb170f756881a5d3d840d2640d75f225f7ff5aed2fbda25b1f2",
+    "optional_acceleration": {
+      "capacity": 549755813888,
+      "kind": "absorbing repeated-square closure",
+      "layers": 39,
+      "note": "compiler optimization only; no macro operator occurs in the PEG"
+    },
+    "ordinary_rows": 8305403,
+    "role": "compile-time finite transition-function generator, never a PEG operator",
+    "row_enumerator_entrypoint": "enumerate_scheduled_rows.iter_scheduled_rows",
+    "termination_measure": {
+      "finite_row_scan_per_step": 8305403,
+      "finite_transition_index_domain": "State x InputSymbol x Neighbourhood2",
+      "primitive_steps_remaining_per_simulation": 416945810716
+    }
+  },
+  "expansion_algorithm": {
+    "entrypoint": "indexed_block_macro_expander",
+    "local_audit_backend": "lmr_rule_expander",
+    "standard_operators_only": [
+      "epsilon",
+      "terminal",
+      "nonterminal",
+      "sequence",
+      "prioritized choice",
+      "and-predicate",
+      "not-predicate",
+      "zero-or-more"
+    ],
+    "well_foundedness": "Transition lookahead consumes the newest terminal before State, Label, Neighbourhood, or Path recursively consults an earlier reversed-input position",
+    "whole_grammar_algorithm": [
+      "enumerate every finite State, WorkingLabel, Neighbourhood2, PathAtMost2, and TransitionIndex",
+      "compute the total scaffolding transition for every TransitionIndex",
+      "add exactly the State, Label, Path, and Transition alternatives in the sufficient direction of LMR Theorem 16",
+      "emit each exact Neighbourhood rule as the finite conjunction of Label and Path tests",
+      "combine alternatives with prioritized choice; an empty alternative set is FAIL"
+    ]
+  },
+  "finite_domains": {
+    "Block(t)": {
+      "domain": {
+        "alphabet": "TapeAlphabet(t)",
+        "kind": "finite_vector_domain",
+        "length": 549755813888
+      },
+      "for_each": "t in Tape",
+      "kind": "dependent_finite_vector"
+    },
+    "BlockOffset": {
+      "kind": "integer_range",
+      "start": 0,
+      "stop_exclusive": 549755813888
+    },
+    "BoundaryState": {
+      "kind": "explicit_enum",
+      "values": [
+        0,
+        1
+      ]
+    },
+    "CanonicalLabel": {
+      "factors": [
+        "OutputBit",
+        "CanonicalTapeLabel(t) for every t in Tape"
+      ],
+      "kind": "dependent_finite_product"
+    },
+    "CanonicalTapeLabel(t)": {
+      "factors": [
+        "BlockOffset",
+        "Block(t)",
+        "OptionalBlock(t)",
+        "OptionalBlock(t)"
+      ],
+      "kind": "finite_product",
+      "meaning": "head offset, current block, left top, right top"
+    },
+    "Edge": {
+      "kind": "integer_range",
+      "start": 0,
+      "stop_exclusive": 590
+    },
+    "InputSymbol": {
+      "kind": "explicit_enum",
+      "values": [
+        "0",
+        "1"
+      ]
+    },
+    "LabelOrUnlabelled": {
+      "kind": "finite_union",
+      "members": [
+        "WorkingLabel",
+        {
+          "kind": "singleton",
+          "value": "UNLABELLED"
+        }
+      ]
+    },
+    "Neighbourhood0": "LabelOrUnlabelled",
+    "Neighbourhood1": {
+      "factors": [
+        "LabelOrUnlabelled",
+        {
+          "alphabet": "OptionalNeighbourhood0",
+          "kind": "vectors",
+          "length": 590
+        }
+      ],
+      "kind": "finite_product"
+    },
+    "Neighbourhood2": {
+      "factors": [
+        "LabelOrUnlabelled",
+        {
+          "alphabet": "OptionalNeighbourhood1",
+          "kind": "vectors",
+          "length": 590
+        }
+      ],
+      "formal_source": "LMR Definition 11: N_2(d,Gamma)",
+      "kind": "finite_product"
+    },
+    "NormalState": {
+      "cardinality": 4,
+      "factors": [
+        "BoundaryState",
+        "OutputBit"
+      ],
+      "kind": "finite_product"
+    },
+    "OptionalBlock(t)": {
+      "kind": "finite_union",
+      "members": [
+        {
+          "kind": "singleton",
+          "value": "EMPTY"
+        },
+        "Block(t)"
+      ]
+    },
+    "OptionalNeighbourhood0": {
+      "kind": "finite_union",
+      "members": [
+        {
+          "kind": "singleton",
+          "value": "MISSING"
+        },
+        "Neighbourhood0"
+      ]
+    },
+    "OptionalNeighbourhood1": {
+      "kind": "finite_union",
+      "members": [
+        {
+          "kind": "singleton",
+          "value": "MISSING"
+        },
+        "Neighbourhood1"
+      ]
+    },
+    "OutputBit": {
+      "kind": "explicit_enum",
+      "values": [
+        0,
+        1
+      ]
+    },
+    "PathAtMost2": {
+      "cardinality": 348691,
+      "kind": "finite_union",
+      "members": [
+        {
+          "kind": "singleton",
+          "value": []
+        },
+        {
+          "alphabet": "Edge",
+          "kind": "vectors",
+          "length": 1
+        },
+        {
+          "alphabet": "Edge",
+          "kind": "vectors",
+          "length": 2
+        }
+      ]
+    },
+    "State": {
+      "cardinality": 6,
+      "kind": "finite_disjoint_union",
+      "members": [
+        {
+          "kind": "singleton",
+          "value": "INITIAL"
+        },
+        "NormalState",
+        {
+          "kind": "singleton",
+          "value": "SINK"
+        }
+      ]
+    },
+    "Tape": {
+      "kind": "integer_range",
+      "start": 0,
+      "stop_exclusive": 295
+    },
+    "TapeAlphabet": [
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[0]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 0,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[1]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 1,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[2]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 2,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[3]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 3,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[4]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 4,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[5]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 5,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[6]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 6,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[7]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 7,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[8]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 8,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[9]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 9,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[10]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 10,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[11]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 11,
+        "values": []
+      },
+      {
+        "cardinality": 90607,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[12]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 12,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[13]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 13,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[14]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 14,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[15]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 15,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[16]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 16,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[17]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 17,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[18]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 18,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[19]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 19,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[20]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 20,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[21]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 21,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[22]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 22,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[23]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 23,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[24]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 24,
+        "values": []
+      },
+      {
+        "cardinality": 90607,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[25]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 25,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[26]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 26,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[27]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 27,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[28]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 28,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[29]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 29,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[30]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 30,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[31]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 31,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[32]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 32,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[33]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 33,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[34]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 34,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[35]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 35,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[36]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 36,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[37]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 37,
+        "values": []
+      },
+      {
+        "cardinality": 90607,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[38]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 38,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[39]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 39,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[40]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 40,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[41]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 41,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[42]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 42,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[43]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 43,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[44]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 44,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[45]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 45,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[46]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 46,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[47]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 47,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[48]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 48,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[49]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 49,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[50]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 50,
+        "values": []
+      },
+      {
+        "cardinality": 90607,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[51]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 51,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[52]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 52,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[53]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 53,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[54]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 54,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[55]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 55,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[56]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 56,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[57]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 57,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[58]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 58,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[59]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 59,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[60]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 60,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[61]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 61,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[62]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 62,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[63]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 63,
+        "values": []
+      },
+      {
+        "cardinality": 90607,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[64]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 64,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[65]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 65,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[66]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 66,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[67]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 67,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[68]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 68,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[69]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 69,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[70]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 70,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[71]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 71,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[72]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 72,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[73]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 73,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[74]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 74,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[75]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 75,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[76]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 76,
+        "values": []
+      },
+      {
+        "cardinality": 90607,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[77]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 77,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[78]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 78,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[79]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 79,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[80]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 80,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[81]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 81,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[82]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 82,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[83]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 83,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[84]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 84,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[85]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 85,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[86]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 86,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[87]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 87,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[88]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 88,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[89]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 89,
+        "values": []
+      },
+      {
+        "cardinality": 90607,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[90]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 90,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[91]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 91,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[92]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 92,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[93]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 93,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[94]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 94,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[95]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 95,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[96]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 96,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[97]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 97,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[98]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 98,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[99]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 99,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[100]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 100,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[101]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 101,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[102]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 102,
+        "values": []
+      },
+      {
+        "cardinality": 90607,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[103]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 103,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[104]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 104,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[105]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 105,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[106]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 106,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[107]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 107,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[108]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 108,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[109]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 109,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[110]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 110,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[111]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 111,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[112]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 112,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[113]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 113,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[114]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 114,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[115]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 115,
+        "values": []
+      },
+      {
+        "cardinality": 90607,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[116]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 116,
+        "values": []
+      },
+      {
+        "cardinality": 5,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[117]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 117,
+        "values": []
+      },
+      {
+        "cardinality": 5,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[118]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 118,
+        "values": []
+      },
+      {
+        "cardinality": 5,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[119]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 119,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[120]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 120,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[121]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 121,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[122]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 122,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[123]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 123,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[124]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 124,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[125]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 125,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[126]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 126,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[127]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 127,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[128]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 128,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[129]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 129,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[130]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 130,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[131]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 131,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[132]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 132,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[133]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 133,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[134]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 134,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[135]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 135,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[136]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 136,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[137]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 137,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[138]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 138,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[139]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 139,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[140]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 140,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[141]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 141,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[142]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 142,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[143]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 143,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[144]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 144,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[145]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 145,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[146]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 146,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[147]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 147,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[148]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 148,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[149]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 149,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[150]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 150,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[151]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 151,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[152]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 152,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[153]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 153,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[154]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 154,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[155]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 155,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[156]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 156,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[157]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 157,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[158]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 158,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[159]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 159,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[160]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 160,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[161]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 161,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[162]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 162,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[163]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 163,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[164]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 164,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[165]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 165,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[166]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 166,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[167]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 167,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[168]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 168,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[169]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 169,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[170]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 170,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[171]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 171,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[172]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 172,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[173]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 173,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[174]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 174,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[175]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 175,
+        "values": []
+      },
+      {
+        "cardinality": 4,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[176]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 176,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[177]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 177,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[178]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 178,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[179]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 179,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[180]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 180,
+        "values": []
+      },
+      {
+        "cardinality": 484700,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[181]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 181,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[182]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 182,
+        "values": []
+      },
+      {
+        "cardinality": 8,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[183]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 183,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[184]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 184,
+        "values": []
+      },
+      {
+        "cardinality": 8,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[185]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 185,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[186]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 186,
+        "values": []
+      },
+      {
+        "cardinality": 8,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[187]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 187,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[188]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 188,
+        "values": []
+      },
+      {
+        "cardinality": 8,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[189]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 189,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[190]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 190,
+        "values": []
+      },
+      {
+        "cardinality": 8,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[191]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 191,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[192]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 192,
+        "values": []
+      },
+      {
+        "cardinality": 8,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[193]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 193,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[194]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 194,
+        "values": []
+      },
+      {
+        "cardinality": 8,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[195]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 195,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[196]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 196,
+        "values": []
+      },
+      {
+        "cardinality": 8,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[197]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 197,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[198]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 198,
+        "values": []
+      },
+      {
+        "cardinality": 8,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[199]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 199,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[200]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 200,
+        "values": []
+      },
+      {
+        "cardinality": 8,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[201]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 201,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[202]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 202,
+        "values": []
+      },
+      {
+        "cardinality": 8,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[203]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 203,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[204]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 204,
+        "values": []
+      },
+      {
+        "cardinality": 8,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[205]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 205,
+        "values": []
+      },
+      {
+        "cardinality": 2445,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[206]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 206,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[207]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 207,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[208]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 208,
+        "values": []
+      },
+      {
+        "cardinality": 4,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[209]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 209,
+        "values": []
+      },
+      {
+        "cardinality": 4,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[210]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 210,
+        "values": []
+      },
+      {
+        "cardinality": 4,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[211]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 211,
+        "values": []
+      },
+      {
+        "cardinality": 5,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[212]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 212,
+        "values": []
+      },
+      {
+        "cardinality": 5,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[213]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 213,
+        "values": []
+      },
+      {
+        "cardinality": 5,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[214]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 214,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[215]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 215,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[216]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 216,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[217]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 217,
+        "values": []
+      },
+      {
+        "cardinality": 5,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[218]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 218,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[219]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 219,
+        "values": []
+      },
+      {
+        "cardinality": 4,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[220]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 220,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[221]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 221,
+        "values": []
+      },
+      {
+        "cardinality": 7,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[222]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 222,
+        "values": []
+      },
+      {
+        "cardinality": 31,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[223]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 223,
+        "values": []
+      },
+      {
+        "cardinality": 1867,
+        "enumerator": "enumerate_scheduled_rows.registered_source_alphabets()[224]",
+        "kind": "certified source-fabric alphabet",
+        "tape": 224,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 225,
+        "values": [
+          "_",
+          "B",
+          "v_",
+          "v#",
+          "v0",
+          "v1"
+        ]
+      },
+      {
+        "cardinality": 6,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 226,
+        "values": [
+          "_",
+          "B",
+          "v_",
+          "v#",
+          "v0",
+          "v1"
+        ]
+      },
+      {
+        "cardinality": 6,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 227,
+        "values": [
+          "_",
+          "B",
+          "v_",
+          "v#",
+          "v0",
+          "v1"
+        ]
+      },
+      {
+        "cardinality": 6,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 228,
+        "values": [
+          "_",
+          "B",
+          "v_",
+          "v#",
+          "v0",
+          "v1"
+        ]
+      },
+      {
+        "cardinality": 6,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 229,
+        "values": [
+          "_",
+          "B",
+          "v_",
+          "v#",
+          "v0",
+          "v1"
+        ]
+      },
+      {
+        "cardinality": 6,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 230,
+        "values": [
+          "_",
+          "B",
+          "v_",
+          "v#",
+          "v0",
+          "v1"
+        ]
+      },
+      {
+        "cardinality": 6,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 231,
+        "values": [
+          "_",
+          "B",
+          "v_",
+          "v#",
+          "v0",
+          "v1"
+        ]
+      },
+      {
+        "cardinality": 6,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 232,
+        "values": [
+          "_",
+          "B",
+          "v_",
+          "v#",
+          "v0",
+          "v1"
+        ]
+      },
+      {
+        "cardinality": 6,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 233,
+        "values": [
+          "_",
+          "B",
+          "v_",
+          "v#",
+          "v0",
+          "v1"
+        ]
+      },
+      {
+        "cardinality": 6,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 234,
+        "values": [
+          "_",
+          "B",
+          "v_",
+          "v#",
+          "v0",
+          "v1"
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 235,
+        "values": [
+          "_",
+          "B",
+          "1"
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 236,
+        "values": [
+          "_",
+          "B",
+          "1"
+        ]
+      },
+      {
+        "cardinality": 90607,
+        "enumerator": "enumerate '_' then @SCHED_INPUT:q<i> for 0<=i<BUFFER_STATES",
+        "kind": "history-worker state register",
+        "tape": 237,
+        "values": []
+      },
+      {
+        "cardinality": 5,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 238,
+        "values": [
+          "_",
+          "@CONT:q2",
+          "@CONT:q3",
+          "@CONT:q4",
+          "@CONT:q5"
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 239,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 240,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 241,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 242,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 243,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 244,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 245,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 246,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 247,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 248,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 249,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 250,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 251,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 252,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 253,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 254,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 255,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 256,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 257,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 258,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 259,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 260,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 261,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 262,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 263,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 264,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 265,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 266,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 267,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 268,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 269,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 270,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 271,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 272,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 273,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 274,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 275,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 276,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 277,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 278,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 279,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 280,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 281,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 282,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 283,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 284,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 285,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 286,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 287,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 288,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 289,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 290,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 291,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 292,
+        "values": [
+          "_",
+          "#",
+          "1"
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 293,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "enumerator": null,
+        "kind": "literal",
+        "tape": 294,
+        "values": [
+          "_",
+          "F",
+          "S"
+        ]
+      }
+    ],
+    "TransitionIndex": {
+      "factors": [
+        "State",
+        "InputSymbol",
+        "Neighbourhood2"
+      ],
+      "kind": "finite_product"
+    },
+    "WorkingLabel": {
+      "kind": "finite_disjoint_union",
+      "members": [
+        "CanonicalLabel",
+        {
+          "kind": "singleton",
+          "value": "SINK_LABEL"
+        }
+      ]
+    }
+  },
+  "format": "finite indexed ordinary PEG generation plan",
+  "path_predicates": 348691,
+  "proof_obligations": {
+    "finite_abbreviation": "Every domain above is obtained by finite enum, finite range, finite sum, finite product, or a fixed-length vector over a finite alphabet.  The nested generation loops therefore print a finite ordinary PEG.",
+    "lmr_refinement": "The full families are precisely State(q), Label(gamma), Neighbourhood(N), Path(p), Transition(q,sigma,N), and AutomatonAccepts from the sufficient direction of Theorem 16.",
+    "macro_locality": "In at most B unit moves a head starting inside a B-cell aligned block cannot leave that block and its two neighbours.",
+    "one_new_node": "If the final head lies in a neighbouring block, the opposite neighbour was not visited; the persistent stack update uses paths of length at most two.",
+    "total_delta": "Canonical reachable neighbourhoods use exact bounded-delay simulation.  Every other member of the finite LMR neighbourhood domain is sent to a fixed rejecting sink state and sink label, so delta is total.",
+    "unique_initial_state": "A synthetic INITIAL state is used only on the unlabelled base and is never re-entered, matching the normalization used in the LMR proof."
+  },
+  "recognizes": "{w w^R : w in {0,1}*}",
+  "rule_families": [
+    {
+      "alternatives": [
+        {
+          "body": "&(symbol State(old_state)) &(symbol Neighbourhood(old_neighbourhood))",
+          "expander": "indexed_block_macro_expander.transition_expression"
+        }
+      ],
+      "dependencies": [
+        "State",
+        "Neighbourhood"
+      ],
+      "lhs_domain": {
+        "index": "TransitionIndex"
+      },
+      "name": "Transition"
+    },
+    {
+      "alternatives": [
+        {
+          "body": "EOF",
+          "when": "state == INITIAL"
+        },
+        {
+          "body": "Ref(Transition(index))",
+          "include_if": "the compile-time delta result has the requested left-hand-side value",
+          "index_domain": "TransitionIndex"
+        }
+      ],
+      "dependencies": [
+        "Transition"
+      ],
+      "lhs_domain": {
+        "state": "State"
+      },
+      "name": "State"
+    },
+    {
+      "alternatives": [
+        {
+          "body": "Ref(Transition(index))",
+          "include_if": "the compile-time delta result has the requested left-hand-side value",
+          "index_domain": "TransitionIndex"
+        }
+      ],
+      "dependencies": [
+        "Transition"
+      ],
+      "lhs_domain": {
+        "label": "WorkingLabel"
+      },
+      "name": "Label"
+    },
+    {
+      "alternatives": [
+        {
+          "body": "EOF",
+          "when": "neighbourhood is the trivial unlabelled base tree"
+        },
+        {
+          "body": "finite conjunction of root Label, present/missing Path predicates, and labels at every present path of length at most two",
+          "expander": "indexed_block_macro_expander.neighbourhood_expression"
+        }
+      ],
+      "dependencies": [
+        "Label",
+        "Path",
+        "EOF"
+      ],
+      "lhs_domain": {
+        "neighbourhood": "Neighbourhood2"
+      },
+      "name": "Neighbourhood"
+    },
+    {
+      "alternatives": [
+        {
+          "body": "epsilon",
+          "when": "path == epsilon"
+        },
+        {
+          "body": "LMR recurrence: Transition; for PATH consume symbol then Path(target) then Path(rest), for SELF continue with Path(rest)",
+          "expander": "indexed_block_macro_expander.path_contribution_plan",
+          "include_if": "the first requested edge is not NONE",
+          "index_domain": "TransitionIndex"
+        }
+      ],
+      "dependencies": [
+        "Transition"
+      ],
+      "lhs_domain": {
+        "path": "PathAtMost2"
+      },
+      "name": "Path"
+    },
+    {
+      "alternatives": [
+        {
+          "body": "choice(State(INITIAL) when initial_output=1, State((q,1)) for q in BoundaryState) ANY*",
+          "expander": "indexed_block_macro_expander.fixed_full_rules"
+        }
+      ],
+      "dependencies": [
+        "State"
+      ],
+      "lhs_domain": {
+        "singleton": true
+      },
+      "name": "AutomatonAccepts"
+    }
+  ],
+  "scaffold_degree": 590,
+  "scaffold_radius": 2,
+  "sha256_without_embedded_digest": "2d208065f425c2c6415223d80e7ead4104e5fbf556e656d4b28d9b4f5de7ed0c",
+  "source_spec": {
+    "alphabet_descriptors": [
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[0]",
+        "tape_end_exclusive": 1,
+        "tape_start": 0,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[1]",
+        "tape_end_exclusive": 2,
+        "tape_start": 1,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[2]",
+        "tape_end_exclusive": 3,
+        "tape_start": 2,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[3]",
+        "tape_end_exclusive": 4,
+        "tape_start": 3,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[4]",
+        "tape_end_exclusive": 5,
+        "tape_start": 4,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[5]",
+        "tape_end_exclusive": 6,
+        "tape_start": 5,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[6]",
+        "tape_end_exclusive": 7,
+        "tape_start": 6,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[7]",
+        "tape_end_exclusive": 8,
+        "tape_start": 7,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[8]",
+        "tape_end_exclusive": 9,
+        "tape_start": 8,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[9]",
+        "tape_end_exclusive": 10,
+        "tape_start": 9,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[10]",
+        "tape_end_exclusive": 11,
+        "tape_start": 10,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[11]",
+        "tape_end_exclusive": 12,
+        "tape_start": 11,
+        "values": []
+      },
+      {
+        "cardinality": 90607,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[12]",
+        "tape_end_exclusive": 13,
+        "tape_start": 12,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[13]",
+        "tape_end_exclusive": 14,
+        "tape_start": 13,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[14]",
+        "tape_end_exclusive": 15,
+        "tape_start": 14,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[15]",
+        "tape_end_exclusive": 16,
+        "tape_start": 15,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[16]",
+        "tape_end_exclusive": 17,
+        "tape_start": 16,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[17]",
+        "tape_end_exclusive": 18,
+        "tape_start": 17,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[18]",
+        "tape_end_exclusive": 19,
+        "tape_start": 18,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[19]",
+        "tape_end_exclusive": 20,
+        "tape_start": 19,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[20]",
+        "tape_end_exclusive": 21,
+        "tape_start": 20,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[21]",
+        "tape_end_exclusive": 22,
+        "tape_start": 21,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[22]",
+        "tape_end_exclusive": 23,
+        "tape_start": 22,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[23]",
+        "tape_end_exclusive": 24,
+        "tape_start": 23,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[24]",
+        "tape_end_exclusive": 25,
+        "tape_start": 24,
+        "values": []
+      },
+      {
+        "cardinality": 90607,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[25]",
+        "tape_end_exclusive": 26,
+        "tape_start": 25,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[26]",
+        "tape_end_exclusive": 27,
+        "tape_start": 26,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[27]",
+        "tape_end_exclusive": 28,
+        "tape_start": 27,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[28]",
+        "tape_end_exclusive": 29,
+        "tape_start": 28,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[29]",
+        "tape_end_exclusive": 30,
+        "tape_start": 29,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[30]",
+        "tape_end_exclusive": 31,
+        "tape_start": 30,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[31]",
+        "tape_end_exclusive": 32,
+        "tape_start": 31,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[32]",
+        "tape_end_exclusive": 33,
+        "tape_start": 32,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[33]",
+        "tape_end_exclusive": 34,
+        "tape_start": 33,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[34]",
+        "tape_end_exclusive": 35,
+        "tape_start": 34,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[35]",
+        "tape_end_exclusive": 36,
+        "tape_start": 35,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[36]",
+        "tape_end_exclusive": 37,
+        "tape_start": 36,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[37]",
+        "tape_end_exclusive": 38,
+        "tape_start": 37,
+        "values": []
+      },
+      {
+        "cardinality": 90607,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[38]",
+        "tape_end_exclusive": 39,
+        "tape_start": 38,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[39]",
+        "tape_end_exclusive": 40,
+        "tape_start": 39,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[40]",
+        "tape_end_exclusive": 41,
+        "tape_start": 40,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[41]",
+        "tape_end_exclusive": 42,
+        "tape_start": 41,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[42]",
+        "tape_end_exclusive": 43,
+        "tape_start": 42,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[43]",
+        "tape_end_exclusive": 44,
+        "tape_start": 43,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[44]",
+        "tape_end_exclusive": 45,
+        "tape_start": 44,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[45]",
+        "tape_end_exclusive": 46,
+        "tape_start": 45,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[46]",
+        "tape_end_exclusive": 47,
+        "tape_start": 46,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[47]",
+        "tape_end_exclusive": 48,
+        "tape_start": 47,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[48]",
+        "tape_end_exclusive": 49,
+        "tape_start": 48,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[49]",
+        "tape_end_exclusive": 50,
+        "tape_start": 49,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[50]",
+        "tape_end_exclusive": 51,
+        "tape_start": 50,
+        "values": []
+      },
+      {
+        "cardinality": 90607,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[51]",
+        "tape_end_exclusive": 52,
+        "tape_start": 51,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[52]",
+        "tape_end_exclusive": 53,
+        "tape_start": 52,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[53]",
+        "tape_end_exclusive": 54,
+        "tape_start": 53,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[54]",
+        "tape_end_exclusive": 55,
+        "tape_start": 54,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[55]",
+        "tape_end_exclusive": 56,
+        "tape_start": 55,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[56]",
+        "tape_end_exclusive": 57,
+        "tape_start": 56,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[57]",
+        "tape_end_exclusive": 58,
+        "tape_start": 57,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[58]",
+        "tape_end_exclusive": 59,
+        "tape_start": 58,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[59]",
+        "tape_end_exclusive": 60,
+        "tape_start": 59,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[60]",
+        "tape_end_exclusive": 61,
+        "tape_start": 60,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[61]",
+        "tape_end_exclusive": 62,
+        "tape_start": 61,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[62]",
+        "tape_end_exclusive": 63,
+        "tape_start": 62,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[63]",
+        "tape_end_exclusive": 64,
+        "tape_start": 63,
+        "values": []
+      },
+      {
+        "cardinality": 90607,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[64]",
+        "tape_end_exclusive": 65,
+        "tape_start": 64,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[65]",
+        "tape_end_exclusive": 66,
+        "tape_start": 65,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[66]",
+        "tape_end_exclusive": 67,
+        "tape_start": 66,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[67]",
+        "tape_end_exclusive": 68,
+        "tape_start": 67,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[68]",
+        "tape_end_exclusive": 69,
+        "tape_start": 68,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[69]",
+        "tape_end_exclusive": 70,
+        "tape_start": 69,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[70]",
+        "tape_end_exclusive": 71,
+        "tape_start": 70,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[71]",
+        "tape_end_exclusive": 72,
+        "tape_start": 71,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[72]",
+        "tape_end_exclusive": 73,
+        "tape_start": 72,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[73]",
+        "tape_end_exclusive": 74,
+        "tape_start": 73,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[74]",
+        "tape_end_exclusive": 75,
+        "tape_start": 74,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[75]",
+        "tape_end_exclusive": 76,
+        "tape_start": 75,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[76]",
+        "tape_end_exclusive": 77,
+        "tape_start": 76,
+        "values": []
+      },
+      {
+        "cardinality": 90607,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[77]",
+        "tape_end_exclusive": 78,
+        "tape_start": 77,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[78]",
+        "tape_end_exclusive": 79,
+        "tape_start": 78,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[79]",
+        "tape_end_exclusive": 80,
+        "tape_start": 79,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[80]",
+        "tape_end_exclusive": 81,
+        "tape_start": 80,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[81]",
+        "tape_end_exclusive": 82,
+        "tape_start": 81,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[82]",
+        "tape_end_exclusive": 83,
+        "tape_start": 82,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[83]",
+        "tape_end_exclusive": 84,
+        "tape_start": 83,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[84]",
+        "tape_end_exclusive": 85,
+        "tape_start": 84,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[85]",
+        "tape_end_exclusive": 86,
+        "tape_start": 85,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[86]",
+        "tape_end_exclusive": 87,
+        "tape_start": 86,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[87]",
+        "tape_end_exclusive": 88,
+        "tape_start": 87,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[88]",
+        "tape_end_exclusive": 89,
+        "tape_start": 88,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[89]",
+        "tape_end_exclusive": 90,
+        "tape_start": 89,
+        "values": []
+      },
+      {
+        "cardinality": 90607,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[90]",
+        "tape_end_exclusive": 91,
+        "tape_start": 90,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[91]",
+        "tape_end_exclusive": 92,
+        "tape_start": 91,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[92]",
+        "tape_end_exclusive": 93,
+        "tape_start": 92,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[93]",
+        "tape_end_exclusive": 94,
+        "tape_start": 93,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[94]",
+        "tape_end_exclusive": 95,
+        "tape_start": 94,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[95]",
+        "tape_end_exclusive": 96,
+        "tape_start": 95,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[96]",
+        "tape_end_exclusive": 97,
+        "tape_start": 96,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[97]",
+        "tape_end_exclusive": 98,
+        "tape_start": 97,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[98]",
+        "tape_end_exclusive": 99,
+        "tape_start": 98,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[99]",
+        "tape_end_exclusive": 100,
+        "tape_start": 99,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[100]",
+        "tape_end_exclusive": 101,
+        "tape_start": 100,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[101]",
+        "tape_end_exclusive": 102,
+        "tape_start": 101,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[102]",
+        "tape_end_exclusive": 103,
+        "tape_start": 102,
+        "values": []
+      },
+      {
+        "cardinality": 90607,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[103]",
+        "tape_end_exclusive": 104,
+        "tape_start": 103,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[104]",
+        "tape_end_exclusive": 105,
+        "tape_start": 104,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[105]",
+        "tape_end_exclusive": 106,
+        "tape_start": 105,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[106]",
+        "tape_end_exclusive": 107,
+        "tape_start": 106,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[107]",
+        "tape_end_exclusive": 108,
+        "tape_start": 107,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[108]",
+        "tape_end_exclusive": 109,
+        "tape_start": 108,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[109]",
+        "tape_end_exclusive": 110,
+        "tape_start": 109,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[110]",
+        "tape_end_exclusive": 111,
+        "tape_start": 110,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[111]",
+        "tape_end_exclusive": 112,
+        "tape_start": 111,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[112]",
+        "tape_end_exclusive": 113,
+        "tape_start": 112,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[113]",
+        "tape_end_exclusive": 114,
+        "tape_start": 113,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[114]",
+        "tape_end_exclusive": 115,
+        "tape_start": 114,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[115]",
+        "tape_end_exclusive": 116,
+        "tape_start": 115,
+        "values": []
+      },
+      {
+        "cardinality": 90607,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[116]",
+        "tape_end_exclusive": 117,
+        "tape_start": 116,
+        "values": []
+      },
+      {
+        "cardinality": 5,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[117]",
+        "tape_end_exclusive": 118,
+        "tape_start": 117,
+        "values": []
+      },
+      {
+        "cardinality": 5,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[118]",
+        "tape_end_exclusive": 119,
+        "tape_start": 118,
+        "values": []
+      },
+      {
+        "cardinality": 5,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[119]",
+        "tape_end_exclusive": 120,
+        "tape_start": 119,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[120]",
+        "tape_end_exclusive": 121,
+        "tape_start": 120,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[121]",
+        "tape_end_exclusive": 122,
+        "tape_start": 121,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[122]",
+        "tape_end_exclusive": 123,
+        "tape_start": 122,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[123]",
+        "tape_end_exclusive": 124,
+        "tape_start": 123,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[124]",
+        "tape_end_exclusive": 125,
+        "tape_start": 124,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[125]",
+        "tape_end_exclusive": 126,
+        "tape_start": 125,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[126]",
+        "tape_end_exclusive": 127,
+        "tape_start": 126,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[127]",
+        "tape_end_exclusive": 128,
+        "tape_start": 127,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[128]",
+        "tape_end_exclusive": 129,
+        "tape_start": 128,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[129]",
+        "tape_end_exclusive": 130,
+        "tape_start": 129,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[130]",
+        "tape_end_exclusive": 131,
+        "tape_start": 130,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[131]",
+        "tape_end_exclusive": 132,
+        "tape_start": 131,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[132]",
+        "tape_end_exclusive": 133,
+        "tape_start": 132,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[133]",
+        "tape_end_exclusive": 134,
+        "tape_start": 133,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[134]",
+        "tape_end_exclusive": 135,
+        "tape_start": 134,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[135]",
+        "tape_end_exclusive": 136,
+        "tape_start": 135,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[136]",
+        "tape_end_exclusive": 137,
+        "tape_start": 136,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[137]",
+        "tape_end_exclusive": 138,
+        "tape_start": 137,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[138]",
+        "tape_end_exclusive": 139,
+        "tape_start": 138,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[139]",
+        "tape_end_exclusive": 140,
+        "tape_start": 139,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[140]",
+        "tape_end_exclusive": 141,
+        "tape_start": 140,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[141]",
+        "tape_end_exclusive": 142,
+        "tape_start": 141,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[142]",
+        "tape_end_exclusive": 143,
+        "tape_start": 142,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[143]",
+        "tape_end_exclusive": 144,
+        "tape_start": 143,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[144]",
+        "tape_end_exclusive": 145,
+        "tape_start": 144,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[145]",
+        "tape_end_exclusive": 146,
+        "tape_start": 145,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[146]",
+        "tape_end_exclusive": 147,
+        "tape_start": 146,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[147]",
+        "tape_end_exclusive": 148,
+        "tape_start": 147,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[148]",
+        "tape_end_exclusive": 149,
+        "tape_start": 148,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[149]",
+        "tape_end_exclusive": 150,
+        "tape_start": 149,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[150]",
+        "tape_end_exclusive": 151,
+        "tape_start": 150,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[151]",
+        "tape_end_exclusive": 152,
+        "tape_start": 151,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[152]",
+        "tape_end_exclusive": 153,
+        "tape_start": 152,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[153]",
+        "tape_end_exclusive": 154,
+        "tape_start": 153,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[154]",
+        "tape_end_exclusive": 155,
+        "tape_start": 154,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[155]",
+        "tape_end_exclusive": 156,
+        "tape_start": 155,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[156]",
+        "tape_end_exclusive": 157,
+        "tape_start": 156,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[157]",
+        "tape_end_exclusive": 158,
+        "tape_start": 157,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[158]",
+        "tape_end_exclusive": 159,
+        "tape_start": 158,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[159]",
+        "tape_end_exclusive": 160,
+        "tape_start": 159,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[160]",
+        "tape_end_exclusive": 161,
+        "tape_start": 160,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[161]",
+        "tape_end_exclusive": 162,
+        "tape_start": 161,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[162]",
+        "tape_end_exclusive": 163,
+        "tape_start": 162,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[163]",
+        "tape_end_exclusive": 164,
+        "tape_start": 163,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[164]",
+        "tape_end_exclusive": 165,
+        "tape_start": 164,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[165]",
+        "tape_end_exclusive": 166,
+        "tape_start": 165,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[166]",
+        "tape_end_exclusive": 167,
+        "tape_start": 166,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[167]",
+        "tape_end_exclusive": 168,
+        "tape_start": 167,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[168]",
+        "tape_end_exclusive": 169,
+        "tape_start": 168,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[169]",
+        "tape_end_exclusive": 170,
+        "tape_start": 169,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[170]",
+        "tape_end_exclusive": 171,
+        "tape_start": 170,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[171]",
+        "tape_end_exclusive": 172,
+        "tape_start": 171,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[172]",
+        "tape_end_exclusive": 173,
+        "tape_start": 172,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[173]",
+        "tape_end_exclusive": 174,
+        "tape_start": 173,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[174]",
+        "tape_end_exclusive": 175,
+        "tape_start": 174,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[175]",
+        "tape_end_exclusive": 176,
+        "tape_start": 175,
+        "values": []
+      },
+      {
+        "cardinality": 4,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[176]",
+        "tape_end_exclusive": 177,
+        "tape_start": 176,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[177]",
+        "tape_end_exclusive": 178,
+        "tape_start": 177,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[178]",
+        "tape_end_exclusive": 179,
+        "tape_start": 178,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[179]",
+        "tape_end_exclusive": 180,
+        "tape_start": 179,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[180]",
+        "tape_end_exclusive": 181,
+        "tape_start": 180,
+        "values": []
+      },
+      {
+        "cardinality": 484700,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[181]",
+        "tape_end_exclusive": 182,
+        "tape_start": 181,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[182]",
+        "tape_end_exclusive": 183,
+        "tape_start": 182,
+        "values": []
+      },
+      {
+        "cardinality": 8,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[183]",
+        "tape_end_exclusive": 184,
+        "tape_start": 183,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[184]",
+        "tape_end_exclusive": 185,
+        "tape_start": 184,
+        "values": []
+      },
+      {
+        "cardinality": 8,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[185]",
+        "tape_end_exclusive": 186,
+        "tape_start": 185,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[186]",
+        "tape_end_exclusive": 187,
+        "tape_start": 186,
+        "values": []
+      },
+      {
+        "cardinality": 8,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[187]",
+        "tape_end_exclusive": 188,
+        "tape_start": 187,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[188]",
+        "tape_end_exclusive": 189,
+        "tape_start": 188,
+        "values": []
+      },
+      {
+        "cardinality": 8,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[189]",
+        "tape_end_exclusive": 190,
+        "tape_start": 189,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[190]",
+        "tape_end_exclusive": 191,
+        "tape_start": 190,
+        "values": []
+      },
+      {
+        "cardinality": 8,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[191]",
+        "tape_end_exclusive": 192,
+        "tape_start": 191,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[192]",
+        "tape_end_exclusive": 193,
+        "tape_start": 192,
+        "values": []
+      },
+      {
+        "cardinality": 8,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[193]",
+        "tape_end_exclusive": 194,
+        "tape_start": 193,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[194]",
+        "tape_end_exclusive": 195,
+        "tape_start": 194,
+        "values": []
+      },
+      {
+        "cardinality": 8,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[195]",
+        "tape_end_exclusive": 196,
+        "tape_start": 195,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[196]",
+        "tape_end_exclusive": 197,
+        "tape_start": 196,
+        "values": []
+      },
+      {
+        "cardinality": 8,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[197]",
+        "tape_end_exclusive": 198,
+        "tape_start": 197,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[198]",
+        "tape_end_exclusive": 199,
+        "tape_start": 198,
+        "values": []
+      },
+      {
+        "cardinality": 8,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[199]",
+        "tape_end_exclusive": 200,
+        "tape_start": 199,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[200]",
+        "tape_end_exclusive": 201,
+        "tape_start": 200,
+        "values": []
+      },
+      {
+        "cardinality": 8,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[201]",
+        "tape_end_exclusive": 202,
+        "tape_start": 201,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[202]",
+        "tape_end_exclusive": 203,
+        "tape_start": 202,
+        "values": []
+      },
+      {
+        "cardinality": 8,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[203]",
+        "tape_end_exclusive": 204,
+        "tape_start": 203,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[204]",
+        "tape_end_exclusive": 205,
+        "tape_start": 204,
+        "values": []
+      },
+      {
+        "cardinality": 8,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[205]",
+        "tape_end_exclusive": 206,
+        "tape_start": 205,
+        "values": []
+      },
+      {
+        "cardinality": 2445,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[206]",
+        "tape_end_exclusive": 207,
+        "tape_start": 206,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[207]",
+        "tape_end_exclusive": 208,
+        "tape_start": 207,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[208]",
+        "tape_end_exclusive": 209,
+        "tape_start": 208,
+        "values": []
+      },
+      {
+        "cardinality": 4,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[209]",
+        "tape_end_exclusive": 210,
+        "tape_start": 209,
+        "values": []
+      },
+      {
+        "cardinality": 4,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[210]",
+        "tape_end_exclusive": 211,
+        "tape_start": 210,
+        "values": []
+      },
+      {
+        "cardinality": 4,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[211]",
+        "tape_end_exclusive": 212,
+        "tape_start": 211,
+        "values": []
+      },
+      {
+        "cardinality": 5,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[212]",
+        "tape_end_exclusive": 213,
+        "tape_start": 212,
+        "values": []
+      },
+      {
+        "cardinality": 5,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[213]",
+        "tape_end_exclusive": 214,
+        "tape_start": 213,
+        "values": []
+      },
+      {
+        "cardinality": 5,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[214]",
+        "tape_end_exclusive": 215,
+        "tape_start": 214,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[215]",
+        "tape_end_exclusive": 216,
+        "tape_start": 215,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[216]",
+        "tape_end_exclusive": 217,
+        "tape_start": 216,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[217]",
+        "tape_end_exclusive": 218,
+        "tape_start": 217,
+        "values": []
+      },
+      {
+        "cardinality": 5,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[218]",
+        "tape_end_exclusive": 219,
+        "tape_start": 218,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[219]",
+        "tape_end_exclusive": 220,
+        "tape_start": 219,
+        "values": []
+      },
+      {
+        "cardinality": 4,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[220]",
+        "tape_end_exclusive": 221,
+        "tape_start": 220,
+        "values": []
+      },
+      {
+        "cardinality": 3,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[221]",
+        "tape_end_exclusive": 222,
+        "tape_start": 221,
+        "values": []
+      },
+      {
+        "cardinality": 7,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[222]",
+        "tape_end_exclusive": 223,
+        "tape_start": 222,
+        "values": []
+      },
+      {
+        "cardinality": 31,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[223]",
+        "tape_end_exclusive": 224,
+        "tape_start": 223,
+        "values": []
+      },
+      {
+        "cardinality": 1867,
+        "kind": "certified source-fabric alphabet",
+        "oracle": "enumerate_scheduled_rows.registered_source_alphabets()[224]",
+        "tape_end_exclusive": 225,
+        "tape_start": 224,
+        "values": []
+      },
+      {
+        "cardinality": 6,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 226,
+        "tape_start": 225,
+        "values": [
+          "_",
+          "B",
+          "v_",
+          "v#",
+          "v0",
+          "v1"
+        ]
+      },
+      {
+        "cardinality": 6,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 227,
+        "tape_start": 226,
+        "values": [
+          "_",
+          "B",
+          "v_",
+          "v#",
+          "v0",
+          "v1"
+        ]
+      },
+      {
+        "cardinality": 6,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 228,
+        "tape_start": 227,
+        "values": [
+          "_",
+          "B",
+          "v_",
+          "v#",
+          "v0",
+          "v1"
+        ]
+      },
+      {
+        "cardinality": 6,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 229,
+        "tape_start": 228,
+        "values": [
+          "_",
+          "B",
+          "v_",
+          "v#",
+          "v0",
+          "v1"
+        ]
+      },
+      {
+        "cardinality": 6,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 230,
+        "tape_start": 229,
+        "values": [
+          "_",
+          "B",
+          "v_",
+          "v#",
+          "v0",
+          "v1"
+        ]
+      },
+      {
+        "cardinality": 6,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 231,
+        "tape_start": 230,
+        "values": [
+          "_",
+          "B",
+          "v_",
+          "v#",
+          "v0",
+          "v1"
+        ]
+      },
+      {
+        "cardinality": 6,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 232,
+        "tape_start": 231,
+        "values": [
+          "_",
+          "B",
+          "v_",
+          "v#",
+          "v0",
+          "v1"
+        ]
+      },
+      {
+        "cardinality": 6,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 233,
+        "tape_start": 232,
+        "values": [
+          "_",
+          "B",
+          "v_",
+          "v#",
+          "v0",
+          "v1"
+        ]
+      },
+      {
+        "cardinality": 6,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 234,
+        "tape_start": 233,
+        "values": [
+          "_",
+          "B",
+          "v_",
+          "v#",
+          "v0",
+          "v1"
+        ]
+      },
+      {
+        "cardinality": 6,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 235,
+        "tape_start": 234,
+        "values": [
+          "_",
+          "B",
+          "v_",
+          "v#",
+          "v0",
+          "v1"
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 236,
+        "tape_start": 235,
+        "values": [
+          "_",
+          "B",
+          "1"
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 237,
+        "tape_start": 236,
+        "values": [
+          "_",
+          "B",
+          "1"
+        ]
+      },
+      {
+        "cardinality": 90607,
+        "kind": "history-worker state register",
+        "oracle": "enumerate '_' then @SCHED_INPUT:q<i> for 0<=i<BUFFER_STATES",
+        "tape_end_exclusive": 238,
+        "tape_start": 237,
+        "values": []
+      },
+      {
+        "cardinality": 5,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 239,
+        "tape_start": 238,
+        "values": [
+          "_",
+          "@CONT:q2",
+          "@CONT:q3",
+          "@CONT:q4",
+          "@CONT:q5"
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 240,
+        "tape_start": 239,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 241,
+        "tape_start": 240,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 242,
+        "tape_start": 241,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 243,
+        "tape_start": 242,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 244,
+        "tape_start": 243,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 245,
+        "tape_start": 244,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 246,
+        "tape_start": 245,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 247,
+        "tape_start": 246,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 248,
+        "tape_start": 247,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 249,
+        "tape_start": 248,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 250,
+        "tape_start": 249,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 251,
+        "tape_start": 250,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 252,
+        "tape_start": 251,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 253,
+        "tape_start": 252,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 254,
+        "tape_start": 253,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 255,
+        "tape_start": 254,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 256,
+        "tape_start": 255,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 257,
+        "tape_start": 256,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 258,
+        "tape_start": 257,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 259,
+        "tape_start": 258,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 260,
+        "tape_start": 259,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 261,
+        "tape_start": 260,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 262,
+        "tape_start": 261,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 263,
+        "tape_start": 262,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 264,
+        "tape_start": 263,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 265,
+        "tape_start": 264,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 266,
+        "tape_start": 265,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 267,
+        "tape_start": 266,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 268,
+        "tape_start": 267,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 269,
+        "tape_start": 268,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 270,
+        "tape_start": 269,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 271,
+        "tape_start": 270,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 272,
+        "tape_start": 271,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 273,
+        "tape_start": 272,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 274,
+        "tape_start": 273,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 275,
+        "tape_start": 274,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 276,
+        "tape_start": 275,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 277,
+        "tape_start": 276,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 278,
+        "tape_start": 277,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 279,
+        "tape_start": 278,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 280,
+        "tape_start": 279,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 281,
+        "tape_start": 280,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 282,
+        "tape_start": 281,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 283,
+        "tape_start": 282,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 284,
+        "tape_start": 283,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 285,
+        "tape_start": 284,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 286,
+        "tape_start": 285,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 287,
+        "tape_start": 286,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 288,
+        "tape_start": 287,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 289,
+        "tape_start": 288,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 290,
+        "tape_start": 289,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 291,
+        "tape_start": 290,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 292,
+        "tape_start": 291,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 293,
+        "tape_start": 292,
+        "values": [
+          "_",
+          "#",
+          "1"
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 294,
+        "tape_start": 293,
+        "values": [
+          "_",
+          0,
+          1
+        ]
+      },
+      {
+        "cardinality": 3,
+        "kind": "literal",
+        "oracle": null,
+        "tape_end_exclusive": 295,
+        "tape_start": 294,
+        "values": [
+          "_",
+          "F",
+          "S"
+        ]
+      }
+    ],
+    "blank": "_",
+    "boundary_states": [
+      0,
+      1
+    ],
+    "initial_boundary_state": 0,
+    "initial_output": 1,
+    "input_alphabet": [
+      "0",
+      "1"
+    ],
+    "name": "corrected SG source composed with compact Galil FAST/SLOW scheduler",
+    "states": 1653051,
+    "tapes": 295
+  },
+  "start_rule": "AutomatonAccepts",
+  "state_predicates": 6,
+  "status": "explicit finite ordinary-PEG generation algorithm complete; the ordinary text is astronomical and retained as exact finite indexed comprehensions",
+  "terminal_direction": "reverse input (the target language is reversal-invariant)",
+  "version": 3
+}
