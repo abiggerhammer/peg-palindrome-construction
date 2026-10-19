@@ -1,0 +1,31 @@
+name: Release integrity and fast smoke tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Verify pinned release bytes
+        run: python tools/verify_release_artifacts.py
+      - name: Install test runner
+        run: python -m pip install pytest
+      - name: Run bounded smoke tests
+        run: |
+          python -m pytest -q \
+            tests/test_indexed_peg_expander.py \
+            tests/test_scheduled_source_composition.py::test_public_composition_constants \
+            tests/test_scheduled_source_composition.py::test_source_state_bit_updates_are_exact \
+            tests/test_sparse_realtime_compiler.py::test_sparse_compiler_handles_distinct_tape_alphabets
